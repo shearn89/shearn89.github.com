@@ -20,8 +20,24 @@
 }
 .content{
 	position: absolute;
-	left: 320px;
 	width: 50%;
+/*	max-height: 400px;
+	text-align: justify;
+	background-color: #4dbce9;
+	padding: 10px;
+	color: #000; #d1e751;
+	font-size: 0.75em;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	border: #000 solid 1px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;*/
+/*	visibility: hidden;*/
+	z-index: 0;
+}
+#textcascader-gui, #textinthelabs, #textmassprint, #textmailer, #textubuntu-bg{
+	position: absolute;
+	left: 320px;
+	width: 100%;
 	max-height: 400px;
 	overflow: auto;
 	text-align: justify;
@@ -33,7 +49,7 @@
 	border: #000 solid 1px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
-/*	visibility: hidden;*/
+	display: none;
 }
 .mug{
 	position: absolute;
@@ -52,4 +68,14 @@
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 0.6875em;
 	background-color: #dfee85;
+}
+a{
+	text-decoration: none;
+	color: #4dbce9;
+}
+a:hover{
+	text-decoration: underline;
+}
+a:visited{
+	color: #4e4e4e;
 }
