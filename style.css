@@ -39,7 +39,7 @@
 /*	visibility: hidden;*/
 	z-index: 0;
 }
-#textcascader-gui, #textinthelabs, #textmassprint, #textmailer, #textubuntu-bg{
+#textcascader-gui, #textinthelabs, #textmassprint, #textmailer, #textubuntu-bg, #text404{
 	position: absolute;
 	left: 320px;
 	width: 100%;
@@ -55,6 +55,10 @@
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	display: none;
+}
+#text404{
+	display: inline;
+	text-align:center;
 }
 .mug{
 	position: absolute;
