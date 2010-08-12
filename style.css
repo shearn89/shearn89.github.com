@@ -93,6 +93,9 @@ a:hover{
 a:visited{
 	color: #4e4e4e;
 }
+.footer a{
+	color: #4dbce9;
+}
 img{
 	border-style: none;
 }
