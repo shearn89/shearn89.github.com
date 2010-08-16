@@ -74,6 +74,7 @@ $(document).ready(function(){
 				for (var j=0; j<6; j++){
 					if (j != i){
 						hideNav(divs[j].textid);
+						hideNav('#welcome');
 						bumpBack(divs[j].divid, 0);
 						divs[j].state = 0;
 					}
@@ -84,6 +85,7 @@ $(document).ready(function(){
 				jQuery.each(divs, function(i){
 					var item = divs[i];
 					hideNav(item.textid);
+					showNav('#welcome');
 					bumpBack(item.divid, 0);
 					item.state = 0;
 				});
