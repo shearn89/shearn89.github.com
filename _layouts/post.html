@@ -24,7 +24,7 @@
 
 
   <!-- CSS: implied media="all" -->
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/default.css">
 
   <!-- Uncomment if you are specifically targeting less enabled mobile browsers
   <link rel="stylesheet" media="handheld" href="css/handheld.css">  -->
@@ -37,25 +37,30 @@
 <body>
 
   <div id="container">
+    <header>
+        <a href="/"><img src="/img/banner.png" alt="shearn89.com" /></a>
+        <h2>My home away from home.</h2>
+    </header>
     <div id="main" role="main">
     	<div id="mainContent">
-        	<section>
-        		{{ content }}
-            </section>
+        	{{ content }}
         </div>
         <aside>
             <ul>
                 <li><a href="http://www.facebook.com/shearn89"><img src="/img/facebook.png" alt="facebook.com/shearn89" /></a></li>
                 <li><a href="http://twitter.com/shearn89"><img src="/img/twitter.png" alt="twitter.com/shearn89" /></a></li>
+                <li><a href="http://github.com/shearn89"><img src="/img/github.png" alt="github.com/shearn89" /></a></li>
+                <li><a href="/blog/"><img src="/img/tumblr.png" alt="/blog.shearn89.com" /></a></li>
+                <li><a href="http://last.fm/user/shearn89"><img src="/img/last-fm.png" alt="last.fm/user/shearn89" /></a></li>
+                <li><a href="http://uk.linkedin.com/in/alexshearn"><img src="/img/linkedin.png" alt="uk.linkedin.com/in/alexshearn" /></a></li>
                 <li><a href="email" onClick="this.href=hide_email();" onMouseOver="window.status=hide_email();return true;" onMouseOut="window.status=''; return true;"><img id="email" src="/img/email.png" alt="email me" /></a></li>
             </ul>
         </aside>
     </div>
-    <footer>
-	<p>This site designed and built by Alex Shearn for <a href="http://www.isthat.it" target="_blank">isthatIT?</a>, &copy; 2011. Powered by <a href="http://html5boilerplate.com/" target="_blank">html5boilerplate</a>.</p>
-    </footer>
   </div> <!--! end of #container -->
-
+    <footer>
+	<p>This site designed and built by Alex Shearn for <a href="http://www.isthat.it" target="_blank">isthatIT?</a>, &copy; 2011. Powered by <a href="http://html5boilerplate.com" target="_blank">html5boilerplate</a>.</p>
+    </footer>
 
   <!-- JavaScript at the bottom for fast page loading -->
 
