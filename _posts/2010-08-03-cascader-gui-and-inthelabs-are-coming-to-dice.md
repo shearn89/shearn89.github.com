@@ -1,15 +1,7 @@
 ---
 layout: post
+title: Cascader-GUI and inthelabs are coming to DICE!
 ---
-
-
-
-
-
-
-
-
-
 
 August 3, 2010, 11:34 am
 
@@ -19,8 +11,8 @@ Just got a reply from DICE tech support about my email. I asked if it was possib
 
 Their reply:
 
-“We’re both in luck: the ruby-gnome2 library will be installed by default
-on the new Fedora 13 lab machines; they’re already installed (minus many
+We're both in luck: the ruby-gnome2 library will be installed by default
+on the new Fedora 13 lab machines; they're already installed (minus many
 research & teaching packages so far) in one lab in AT, and before the
 start of semester will be rolled out across the lab.
 
@@ -28,11 +20,11 @@ $ rpm -qi ruby-gnome2
 Name        : ruby-gnome2
 Version     : 0.19.4
 Release     : 2.fc13
-[…]
+[�]
 
-An example F13 machine is ‘tulla’, on which you might be able to
+An example F13 machine is ‘tulla', on which you might be able to
 remotely test your tools.”
 
-Ahhhh yeah! I’ll give it a test this afternoon…
+Ahhhh yeah! I'll give it a test this afternoon...
     
 
