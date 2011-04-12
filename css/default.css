@@ -299,12 +299,18 @@ footer a:hover{
 
 @media all and (orientation:portrait) {
   /* Style adjustments for portrait mode goes here */
-
+	#container{
+		max-width: 100%;
+		width: 100%;
+	}
 }
 
 @media all and (orientation:landscape) {
   /* Style adjustments for landscape mode goes here */
-
+	#container{
+		max-width: 100%;
+		width: 100%;
+	}
 }
 
 /* Grade-A Mobile Browsers (Opera Mobile, Mobile Safari, Android Chrome)
