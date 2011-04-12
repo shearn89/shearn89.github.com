@@ -174,16 +174,16 @@ html, body{
 	position: relative;
 	min-height: 100%;
 	height: auto;
-	width: 720px;
+	width: 900px;
 	left: 50%;
-	margin-left: -360px;
+	margin-left: -450px;
 	padding: 0 18px;
 	border-left: #444 2px solid;
 	border-right: #444 2px solid;
 }
 	
 header{
-	width: 720px;
+	width: 900px;
 	padding: 72px 0 18px 0;
 	text-align: center;
 }
@@ -199,11 +199,13 @@ header h2{
 	overflow: auto;
 	padding-bottom: 36px;
 	display: table;
-	width: 720px;
+	width: 900px;
 }
 #mainContent{
 	display: table-cell;
-	max-width: 560px;
+	max-width: 740px;
+	text-align: justify;
+	text-indent: 18px;
 }
 #mainContent img{
 	max-width: 300px;
@@ -247,9 +249,9 @@ footer{
 	margin-top: -36px; /* negative value of footer height */
 	height: 36px;
 	clear: both;
-	width: 720px;
+	width: 900px;
 	left: 50%;
-	margin-left: -360px;
+	margin-left: -450px;
 	text-align: center;
 	font-size: 11px;
 	background-color: #444;
