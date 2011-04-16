@@ -2,7 +2,7 @@
 layout: default
 title: shearn89.com
 ---
-
+<h1>Blog posts: thoughts, musings, quotes, links, bears. Yes, <a href="http://www.google.com/imghp?q=awesome+bear" target="_blank">I said</a> <a href="http://shearn89.s3.amazonaws.com/cute_bear_fight.jpg">bears.</a></h1>
 {% for post in site.posts %}
-	<h1>{{ post.date | date: "%B %e, %Y" }} - <a href="{{ post.url }}">{{ post.title }}</a></h1>
+	<h2>{{ post.date | date: "%B %e, %Y" }} - <a href="{{ post.url }}">{{ post.title }}</a></h2>
 {% endfor %}

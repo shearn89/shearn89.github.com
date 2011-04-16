@@ -173,8 +173,8 @@ html, body{
 #container{
 	position: relative;
 	min-height: 100%;
-	height: auto;
 	width: 900px;
+	max-width: 100%;
 	left: 50%;
 	margin-left: -450px;
 	padding: 0 18px;
@@ -184,7 +184,7 @@ html, body{
 	
 header{
 	width: 900px;
-	padding: 72px 0 18px 0;
+	padding: 54px 0 18px 0;
 	text-align: center;
 }
 header img{
@@ -196,20 +196,24 @@ header h2{
 }
 
 #main{
-	overflow: auto;
-	padding-bottom: 36px;
 	display: table;
 	width: 900px;
+	overflow: auto;
+	padding-bottom: 36px;
 }
 #mainContent{
 	display: table-cell;
 	max-width: 740px;
 	text-align: justify;
 	text-indent: 18px;
+	padding-bottom: 18px;
 }
 #mainContent img{
 	max-width: 300px;
 	display: block;
+}
+#mainContent h1{
+	font-size: 18px;
 }
 #labels{
 	font-size: 36px;
@@ -242,14 +246,13 @@ aside img{
 	background: url(../img/blue_background_64.png) 0 64px no-repeat;
 	background-position: 0 64px;
 }
-
-
 footer{
 	position: relative;
 	margin-top: -36px; /* negative value of footer height */
 	height: 36px;
 	clear: both;
 	width: 900px;
+	max-width: 100%;
 	left: 50%;
 	margin-left: -450px;
 	text-align: center;
@@ -265,11 +268,7 @@ footer a, footer a:active, footer a:visited{
 footer a:hover{
 	color: #cdefff;
 }
-#roboto{
-	width: 100px;
-	position: relative;
-	top: 5px;
-}
+
 /**
  * Non-semantic helper classes: please define your styles before this section.
  */
@@ -299,18 +298,10 @@ footer a:hover{
 
 @media all and (orientation:portrait) {
   /* Style adjustments for portrait mode goes here */
-	#container{
-		max-width: 100%;
-		width: 100%;
-	}
 }
 
 @media all and (orientation:landscape) {
   /* Style adjustments for landscape mode goes here */
-	#container{
-		max-width: 100%;
-		width: 100%;
-	}
 }
 
 /* Grade-A Mobile Browsers (Opera Mobile, Mobile Safari, Android Chrome)
