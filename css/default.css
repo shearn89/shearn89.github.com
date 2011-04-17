@@ -339,13 +339,12 @@ html, body {
   position: absolute;
   text-decoration: none;
   width: 250px;
-  border: 2px solid red;
   -moz-transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-/* line 36, ../src/_main.scss */
+/* line 35, ../src/_main.scss */
 #banner span {
   background: #444;
   color: #cdefff;
@@ -370,43 +369,43 @@ html, body {
   -o-transition-duration: 1s;
   transition-duration: 1s;
 }
-/* line 49, ../src/_main.scss */
+/* line 48, ../src/_main.scss */
 #banner span:last-child {
   background: #9ee0fc;
   color: #444;
   opacity: 0;
 }
-/* line 56, ../src/_main.scss */
+/* line 55, ../src/_main.scss */
 #banner:hover span:first-child {
   opacity: 0;
 }
-/* line 59, ../src/_main.scss */
+/* line 58, ../src/_main.scss */
 #banner:hover span:last-child {
   opacity: 1;
 }
 
 @media all and (-webkit-transform-3d) {
-  /* line 67, ../src/_main.scss */
+  /* line 66, ../src/_main.scss */
   #banner span {
     opacity: 1 !important;
     -webkit-backface-visibility: hidden;
     -webkit-transition: -webkit-transform 1s;
   }
-  /* line 71, ../src/_main.scss */
+  /* line 70, ../src/_main.scss */
   #banner span:last-child {
     -webkit-transform: rotateX(180deg);
   }
-  /* line 76, ../src/_main.scss */
+  /* line 75, ../src/_main.scss */
   #banner:hover span:first-child {
     -webkit-transform: rotateX(180deg);
   }
-  /* line 79, ../src/_main.scss */
+  /* line 78, ../src/_main.scss */
   #banner:hover span:last-child {
     -webkit-transform: rotateX(360deg);
   }
 }
 
-/* line 86, ../src/_main.scss */
+/* line 85, ../src/_main.scss */
 #container {
   position: relative;
   min-height: 100%;
@@ -419,23 +418,23 @@ html, body {
   border-right: #444 2px solid;
 }
 
-/* line 98, ../src/_main.scss */
+/* line 97, ../src/_main.scss */
 header {
   width: 900px;
   padding: 54px 0 18px 0;
   text-align: center;
 }
-/* line 102, ../src/_main.scss */
+/* line 101, ../src/_main.scss */
 header img {
   width: 600px;
   padding-bottom: 9px;
 }
-/* line 106, ../src/_main.scss */
+/* line 105, ../src/_main.scss */
 header h2 {
   font-size: 18px;
 }
 
-/* line 110, ../src/_main.scss */
+/* line 109, ../src/_main.scss */
 #main {
   display: table;
   width: 900px;
@@ -443,7 +442,7 @@ header h2 {
   padding-bottom: 36px;
 }
 
-/* line 116, ../src/_main.scss */
+/* line 115, ../src/_main.scss */
 #mainContent {
   display: table-cell;
   max-width: 740px;
@@ -451,28 +450,28 @@ header h2 {
   text-indent: 18px;
   padding-bottom: 18px;
 }
-/* line 123, ../src/_main.scss */
+/* line 122, ../src/_main.scss */
 #mainContent img {
   max-width: 300px;
   display: block;
 }
-/* line 127, ../src/_main.scss */
+/* line 126, ../src/_main.scss */
 #mainContent h1 {
   font-size: 18px;
 }
-/* line 130, ../src/_main.scss */
+/* line 129, ../src/_main.scss */
 #mainContent h2 {
   padding-top: 9px;
   text-decoration: underline;
 }
-/* line 134, ../src/_main.scss */
+/* line 133, ../src/_main.scss */
 #mainContent ul, #mainContent ol {
   margin-left: 36px;
   text-indent: 0;
   padding: 9px 0;
 }
 
-/* line 141, ../src/_main.scss */
+/* line 140, ../src/_main.scss */
 blockquote {
   font-family: "Geosans", Helvetica, Verdana, sans-serif;
   font-size: 14px;
@@ -482,7 +481,7 @@ blockquote {
   border-left: 2px dotted #444;
 }
 
-/* line 149, ../src/_main.scss */
+/* line 148, ../src/_main.scss */
 pre {
   text-indent: 0;
   font-family: "Menlo", "Lucida Console", Monaco, monospace;
@@ -490,19 +489,19 @@ pre {
   background: #eee;
 }
 
-/* line 155, ../src/_main.scss */
+/* line 154, ../src/_main.scss */
 code {
   font-family: "Menlo", "Lucida Console", Monaco, monospace;
 }
 
-/* line 159, ../src/_main.scss */
+/* line 158, ../src/_main.scss */
 #labels {
   font-size: 54px;
   font-weight: bold;
   text-align: center;
   padding: 18px 0 0 0;
 }
-/* line 165, ../src/_main.scss */
+/* line 164, ../src/_main.scss */
 #labels li {
   list-style: none;
   list-style-image: none;
@@ -511,19 +510,19 @@ code {
   opacity: 0;
 }
 
-/* line 174, ../src/_main.scss */
+/* line 173, ../src/_main.scss */
 aside {
   display: table-cell;
   text-align: right;
   width: 160px;
 }
-/* line 179, ../src/_main.scss */
+/* line 178, ../src/_main.scss */
 aside li {
   list-style: none;
   list-style-image: none;
   display: inline;
 }
-/* line 184, ../src/_main.scss */
+/* line 183, ../src/_main.scss */
 aside img {
   height: 64px;
   width: 64px;
@@ -532,7 +531,7 @@ aside img {
   background-position: 0 64px;
 }
 
-/* line 192, ../src/_main.scss */
+/* line 191, ../src/_main.scss */
 footer {
   position: relative;
   margin-top: -36px;
@@ -550,15 +549,15 @@ footer {
   line-height: 36px;
   padding: 0 20px;
 }
-/* line 208, ../src/_main.scss */
+/* line 207, ../src/_main.scss */
 footer a {
   color: #9ee0fc;
 }
-/* line 210, ../src/_main.scss */
+/* line 209, ../src/_main.scss */
 footer a:active, footer a:visited {
   color: #9ee0fc;
 }
-/* line 213, ../src/_main.scss */
+/* line 212, ../src/_main.scss */
 footer a:hover {
   color: #cdefff;
 }
