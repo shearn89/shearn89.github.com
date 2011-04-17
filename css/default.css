@@ -81,8 +81,6 @@ html { overflow-y: scroll; }
 /* Accessible focus treatment: people.opera.com/patrickl/experiments/keyboard/test */
 a:hover, a:active { outline: none; }
 
-ol { margin-left: 2em;list-style-type: decimal; }
-
 /* Remove margins for navigation lists */
 nav ul, nav li { margin: 0; list-style:none; list-style-image: none; }
 
@@ -166,6 +164,15 @@ a:hover { color: #0b108c; }
  *
  * Author: Alex 'shearn89' Shearn
  **/
+@font-face {
+	font-family: "Menlo";
+	src: url(/Menlo.ttc) format('truetype');
+}
+@font-face {
+	font-family: "Geosans";
+	src: url(/GeosansLight.ttf) format('truetype');
+}
+ 
 html, body{
 	width: 100%;
 	height: 100%;
@@ -215,6 +222,34 @@ header h2{
 #mainContent h1{
 	font-size: 18px;
 }
+#mainContent h2{
+	padding-top: 9px;
+	text-decoration:underline;
+}
+blockquote{
+	font-family: "Geosans", Helvetica, Verdana, sans-serif;
+	font-size: 14px;
+	/*font-style: italic;*/
+	padding: 0 18px;
+	margin: 12px 0;
+	border-left: 2px dotted #444;
+}
+pre{
+	text-indent: 0;
+	font-family: "Menlo", "Lucida Console", Monaco, monospace;
+	font-size: 12px;
+	background: #eee;
+}
+code{
+	font-family: "Menlo", "Lucida Console", Monaco, monospace;
+}
+#mainContent ul, #mainContent ol {
+	margin-left: 36px;
+	text-indent: 0;
+	padding: 9px 0;
+}
+
+
 #labels{
 	font-size: 36px;
 	font-weight: bold;
