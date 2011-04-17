@@ -1,0 +1,217 @@
+/* main styles */
+
+@import "compass";
+
+/* MY VARIABLES */
+$main-width: 900px;
+$footer-height: 36px;
+$unit: 18px;
+$link-color: #9ee0fc;
+$hover-color: #cdefff;
+/* END */
+
+@font-face {
+	font-family: "Menlo";
+	src: url(/Menlo.ttc) format('truetype');
+}
+@font-face {
+	font-family: "Geosans";
+	src: url(/GeosansLight.ttf) format('truetype');
+}
+ 
+html, body{
+	width: 100%;
+	height: 100%;
+}
+
+#banner{
+	left: -65px;
+	height: 30px;
+	top: 40px;
+	position: absolute;
+	text-decoration: none;
+	width: 250px;
+	border: 2px solid red;
+	@include rotate(-45deg);
+	span {
+		background: #444;
+		color: $hover-color;
+		font-size: 12px;
+		font-weight: bold;
+		left: 0;
+		padding: 5px 0;
+		position: absolute;
+		text-align: center;
+		font-family: Helvetica, Verdana, sans-serif;
+		width: 250px;
+		@include box-shadow(rgba(black, 0.2), 1px, 1px, 10px);
+		@include transition(opacity, 1s);
+		&:last-child {
+			background: $link-color;
+			color: #444;
+			opacity: 0;
+		}
+	}
+	&:hover span {
+		&:first-child {
+			opacity: 0;
+		}
+		&:last-child {
+			opacity: 1;
+		}
+	}
+}
+
+@media all and (-webkit-transform-3d) {
+	#banner {
+		span {
+			opacity: 1 !important;
+			-webkit-backface-visibility: hidden;
+			-webkit-transition: -webkit-transform 1s;
+			&:last-child {
+				-webkit-transform: rotateX(180deg);
+			}
+		}
+		&:hover span {
+			&:first-child {
+				-webkit-transform: rotateX(180deg);
+			}
+			&:last-child {
+				-webkit-transform: rotateX(360deg);
+			}
+		}
+	}
+}
+
+#container{
+	position: relative;
+	min-height: 100%;
+	width: $main-width;
+	max-width: 100%;
+	left: 50%;
+	margin-left: -$main-width/2;
+	padding: 0 $unit;
+	border-left: #444 2px solid;
+	border-right: #444 2px solid;
+}
+	
+header {
+	width: $main-width;
+	padding: 3*$unit 0 $unit 0;
+	text-align: center;
+	img{
+		width: 600px;
+		padding-bottom: $unit/2;
+	}
+	h2{
+		font-size: $unit;
+	}
+}
+#main{
+	display: table;
+	width: $main-width;
+	overflow: auto;
+	padding-bottom: $footer-height;
+}
+#mainContent{
+	display: table-cell;
+	max-width: 740px;
+	text-align: justify;
+	text-indent: $unit;
+	padding-bottom: $unit;
+	
+	img{
+		max-width: 300px;
+		display: block;
+	}	
+	h1{
+		font-size: $unit;
+	}
+	h2{
+		padding-top: $unit/2;
+		text-decoration:underline;
+	}
+	ul, ol {
+	margin-left: $unit*2;
+	text-indent: 0;
+	padding: $unit/2 0;
+	}
+}
+
+blockquote{
+	font-family: "Geosans", Helvetica, Verdana, sans-serif;
+	font-size: 14px;
+	/*font-style: italic;*/
+	padding: 0 $unit;
+	margin: $unit*2/3 0;
+	border-left: 2px dotted #444;
+}
+pre{
+	text-indent: 0;
+	font-family: "Menlo", "Lucida Console", Monaco, monospace;
+	font-size: $unit*2/3;
+	background: #eee;
+}
+code{
+	font-family: "Menlo", "Lucida Console", Monaco, monospace;
+}
+
+#labels{
+	font-size: $unit*3;
+	font-weight: bold;
+	text-align: center;
+	padding: $unit 0 0 0;
+	
+	li{
+		list-style: none;
+		list-style-image: none;
+		position: relative;
+		display: inline;
+		opacity: 0;
+	}
+}
+
+aside{
+	display: table-cell;
+	text-align: right;
+	width: 160px;
+	
+	li{
+		list-style: none;
+		list-style-image: none;
+		display: inline;
+	}
+	img{
+		height: 64px;
+		width: 64px;
+		opacity: 1;
+		background: url(../img/blue_background_64.png) 0 64px no-repeat;
+		background-position: 0 64px;
+	}
+}
+footer{
+	position: relative;
+	margin-top: -$footer-height; /* negative value of footer height */
+	height: $footer-height;
+	clear: both;
+	width: $main-width;
+	max-width: 100%;
+	left: 50%;
+	margin-left: -$main-width/2;
+	text-align: center;
+	font-size: 11px;
+	background-color: #444;
+	color: #fff;
+	line-height: $footer-height;
+	padding: 0 20px;
+
+	a{
+		color: $link-color;
+		&:active, &:visited {
+		color: $link-color;
+		}
+		&:hover {
+		color: $hover-color;
+		}
+	}
+}
