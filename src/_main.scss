@@ -82,6 +82,13 @@ html, body{
 		}
 	}
 }
+marquee{
+	position: absolute;
+	z-index: 10;
+	top: 7.5px;
+	height: 21px;
+	margin-bottom: -21px;
+}
 
 #container{
 	position: relative;
@@ -132,9 +139,9 @@ header {
 		text-decoration:underline;
 	}
 	ul, ol {
-	margin-left: $unit*2;
-	text-indent: 0;
-	padding: $unit/2 0;
+		margin-left: $unit*2;
+		text-indent: 0;
+		padding: $unit/2 0;
 	}
 }
 
@@ -213,5 +220,9 @@ footer{
 		&:hover {
 		color: $hover-color;
 		}
+	}
+	p{
+		position: relative;
+		z-index: 100;
 	}
 }
