@@ -29,7 +29,7 @@ html, body{
 	height: 30px;
 	top: 40px;
 	position: absolute;
-	z-index: 100;
+	z-index: 75;
 	text-decoration: none;
 	width: 250px;
 	@include rotate(-45deg);
@@ -84,9 +84,10 @@ html, body{
 }
 marquee{
 	position: absolute;
-	z-index: 10;
+	z-index: 50;
 	top: 7.5px;
 	height: 21px;
+	width: 100%;
 	margin-bottom: -21px;
 }
 
