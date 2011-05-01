@@ -1,0 +1,15 @@
+require 'rubygems'
+require 'git'
+
+task :default => [:spell_check]
+
+desc "Spell check the document"
+task :spell_check do
+  if system('which aspell')
+  	sh "aspell check -e #{TEX_NAME}"
+  else
+  	puts ">> aspell not installed, please install it with a useful dictionary.\n> (sudo) brew install aspell --lang=en"
+  end
+end
+task :spell => [:spell_check]
+

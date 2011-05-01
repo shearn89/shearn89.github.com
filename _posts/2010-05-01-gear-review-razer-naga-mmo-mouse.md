@@ -16,7 +16,7 @@ The mouse, with numberpad clearly visible:
 
 [<img src="/img/564268585_1.jpg" alt="" />](/img/564268585_1.jpg)
 
-The stuff: quick start guide, in depth guide, catalog, trainer bobbles (read on for more info), stickers, certificate of authenticity, and a postcard…
+The stuff: quick start guide, in depth guide, catalogue, trainer bobbles (read on for more info), stickers, certificate of authenticity, and a postcard…
 
 [<img src="/img/564268585_2.jpg" alt="" />](/img/564268585_2.jpg)
 
@@ -26,7 +26,7 @@ The number keys are around the size of those of a mobile phone keypad from a few
 
 So, with no more ado, here are some screenshots, and some notes on the setup used! Feel free to leave a comment if you have any questions or would like to know more.
 
-Oh, and once again, here's my armory link: [DK](http://eu.wowarmory.com/character-sheet.xml?r=Shadowsong&amp;cn=Kasputin&amp;gn=Seekers+of+Divinity) and [Shaman](http://eu.wowarmory.com/character-sheet.xml?r=Shadowsong&amp;cn=Kassaran).
+Oh, and once again, here's my armoury link: [DK](http://eu.wowarmory.com/character-sheet.xml?r=Shadowsong&amp;cn=Kasputin&amp;gn=Seekers+of+Divinity) and [Shaman](http://eu.wowarmory.com/character-sheet.xml?r=Shadowsong&amp;cn=Kassaran).
 
 
 Addons used:

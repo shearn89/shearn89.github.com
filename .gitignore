@@ -3,3 +3,5 @@
 _site
 *.DS_*
 *_backup*
+*.swp
+*.bak
