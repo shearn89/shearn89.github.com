@@ -54,6 +54,7 @@
 # - title: Project title, which can be accessed in the layout.
 # - published: Project won't be published if this is false.
 
+require 'rubygems'
 require 'fileutils'
 require 'find'
 require 'git'
@@ -96,8 +97,8 @@ module Jekyll
       
       # Decide the extension - if it's not textile, markdown or HTML treat it as textile.
       ext = File.extname(readme)
-      unless ['.textile', '.markdown', '.html'].include?(ext)
-        ext = '.textile'
+      unless ['.md', '.textile', '.markdown', '.html'].include?(ext)
+        ext = '.markdown'
       end
       
       # Try to get the readme data for this path.
