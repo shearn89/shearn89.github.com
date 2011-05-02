@@ -21,4 +21,4 @@ I thought I'd collect some great quotes from Twitter:
 
 > So Bin Larden is finally dead. It's amazing what the Americans can do when the playstation network is down. #Osama -- [@da2montero](twitter.com/@da2montero)
 
-> #Osama is dead. Excellent reason to get absolutely hammered. Ooh, Team America's trending. My Monday's sorted =D -- [@Bethnyspears](twitter.com/@Bethnyspears)
+> Osama is dead. Excellent reason to get absolutely hammered. Ooh, Team America's trending. My Monday's sorted =D -- [@Bethnyspears](twitter.com/@Bethnyspears)
