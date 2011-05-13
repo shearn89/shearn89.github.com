@@ -8,6 +8,8 @@ function hide_email() {
 }
 
 jQuery(function(){
+	$('a.lightbox').fancybox();
+
 	links = $('aside').find('a');
 	labels = $('#labels').find('li');
 
