@@ -11,12 +11,12 @@ May 18, 2011, 00:33
 
 So, 2 exmas left. Literally can't wait for the week after: I plan to get nice and drunk, and generally just chill out. It's even more awesome that there's a huge number of awesome events on after exams:
 
-- Big Cheese/Hospitality
-- Crookers
-- Musique Boutique IV
-- Friend's Birthday Dinner
-- Friend's Actual Birthday
-- Other Friend's Birthday
+1. Big Cheese/Hospitality
+1. Crookers
+2. Musique Boutique IV
+3. Friend's Birthday Dinner
+5. Friend's Actual Birthday
+7. Other Friend's Birthday
 
 ...and then we're into June and there's trips to Wales, a 21st, Beach Break Live (omg I'm so excited for this).
 
