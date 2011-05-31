@@ -11,16 +11,6 @@ task :help do
 	system('rake -T')
 end
 
-desc "Spell check the document"
-task :spell_check do
-  if system('which aspell')
-  	sh "aspell check -e #{TEX_NAME}"
-  else
-  	puts ">> aspell not installed, please install it with a useful dictionary.\n> (sudo) brew install aspell --lang=en"
-  end
-end
-task :spell => [:spell_check]
-
 desc "Make a new post"
 task :new do
   t = Time.now
@@ -51,6 +41,7 @@ end
 desc "Commit and push"
 task :update do
 	puts "New files: "
+	# Try the git gem for this bit <<<< 
 	system "git ls-files -o --exclude-standard"
 	puts ">> Continue? y/N :"
 	input = STDIN.gets.chomp
