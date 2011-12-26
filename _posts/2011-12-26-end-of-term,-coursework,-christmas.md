@@ -27,13 +27,13 @@ That's about it really! I'll leave you with some of my twitter and youtube highl
 * [Aggressive autonomous quad-rotor flight](http://www.youtube.com/watch?v=MvRTALJp8DM)
 
 And tweets:
-
 * "Put a live flashbang in Robin's Christmas stocking. Kid's gotta learn danger and semi-permanent hearing loss can strike at any moment." [source](https://twitter.com/#!/God_Damn_Batman/status/150661565287370752)
 * "Feed the yak, and he will fall..." Wise words." Me.
 * "All I wanted was some library steps. Instead, I found an eBay seller having a nervous breakdown mid-item description: http://bit.ly/sWzTC2" [source](https://twitter.com/#!/katbrown82/status/138645663868129280)
 * "Um seriously hinking aboot rentin oot the M8 fir new year. #garysmotorwaynewyearparty #noastreetpartyamotorwayparty #daeit" [source](https://twitter.com/#!/GARYTANK/status/149553240386711552)
 * "More Parks and Rec: "Every 3 weeks I have to sand down my toenails. They're too strong for clippes [sic]..." Me.
 * "'I was distracted. By the largest penis I have EVER seen.' <3 parks and rec." Me again.
+
 Also this: [Ron Swanson in a tiny hat](http://nymag.com/daily/entertainment/2011/05/ron_swanson_tiny_hat_gif.html)
 
 Happy Holidays!
