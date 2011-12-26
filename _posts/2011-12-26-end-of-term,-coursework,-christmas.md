@@ -14,13 +14,11 @@ As well as all the academic stuff, I applied for a job as a ski rep (which I did
 Had some stress over Christmas with the grandparents - my Grandfather had a tooth out, but because he's getting quite elderly there were some complications, and he spent 3.5 hours in A+E on Christmas Eve. Not ideal! My parents and sister and I all went to midnight mass on Christmas Eve: the first time I'd ever been. It definitely made me feel a whole lot more festive, which given my distinct Grinchy-ness over the last few days was a big help. The grandparents still made it over here on Christmas day though, and they absolutely adored their presents...
 
 Sooo, over the next couple of weeks before term starts again I have to:
-
 1. **Do more project work.** I need to get my prediction algorithm working before the start of term, even if it's crude and inaccurate.
 2. **Confirm the details for our new flatmate.** One of my flatmates is moving to Derby for an Engineering placement, so we've got a new one moving in. He might be French. We're still working on it.
 3. **Get fitter.** Found some slightly gimmicky 100 pushups app. I'm trying to stick with it to see if it makes a difference, given that it only takes about half an hour every couple of days. If I can, I might try and start running next term (yes, I did say *running*. I might be going mad.)
 
 That's about it really! I'll leave you with some of my twitter and youtube highlights from the past two months...
-
 * [Human slingshot slip-and-slide](http://www.youtube.com/watch?v=ShFAeNdiEiA)
 * [Awesome Hilltop Hoods song](http://www.youtube.com/watch?v=AVkoj35YD2s)
 * [Cup Stacking girl vs. Skrillex](http://www.youtube.com/watch?v=PapG53eIM1M)
@@ -42,4 +40,4 @@ P.S
 Watch Parks and Recreation. It's amazing.
 
 P.P.S
-Oh, I grew a moustache. Feel free to sponsor it retrospectively [http://mobro.co/alexshearn].
+Oh, I grew a moustache. Feel free to sponsor it retrospectively: http://mobro.co/alexshearn
