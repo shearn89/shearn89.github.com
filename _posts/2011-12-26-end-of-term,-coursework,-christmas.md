@@ -40,4 +40,4 @@ P.S
 Watch Parks and Recreation. It's amazing.
 
 P.P.S
-Oh, I grew a moustache. Feel free to sponsor it retrospectively: http://mobro.co/alexshearn
+Oh, I grew a moustache. Feel free to [sponsor it retrospectively](http://mobro.co/alexshearn).
