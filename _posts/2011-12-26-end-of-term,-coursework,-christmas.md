@@ -29,7 +29,7 @@ And tweets:
 * "'Feed the yak, and he will fall...' Wise words." Me.
 * "All I wanted was some library steps. Instead, I found an eBay seller having a nervous breakdown mid-item description: http://bit.ly/sWzTC2" [source](https://twitter.com/#!/katbrown82/status/138645663868129280)
 * "Um seriously hinking aboot rentin oot the M8 fir new year. #garysmotorwaynewyearparty #noastreetpartyamotorwayparty #daeit" [source](https://twitter.com/#!/GARYTANK/status/149553240386711552)
-* "More Parks and Rec: 'Every 3 weeks I have to sand down my toenails. They're too strong for clippes *[sic]*...'" Me.
+* "More Parks and Rec: 'Every 3 weeks I have to sand down my toenails. They're too strong for clippers...'" Me.
 
 Also this: [Ron Swanson in a tiny hat](http://nymag.com/daily/entertainment/2011/05/ron_swanson_tiny_hat_gif.html)
 
