@@ -17,6 +17,6 @@ But, my BT graduate placement application is going well - I'm off to an assessme
 
 Other than that, I should stop procrastinating and get back to work. I'll leave you with this youtube video, it totally rocks.
 
-[http://www.youtube.com/watch?v=_nMkfb5g00A]
+[Matt Corby on Triple J](http://www.youtube.com/watch?v=_nMkfb5g00A)
 
 Laters y'all...
