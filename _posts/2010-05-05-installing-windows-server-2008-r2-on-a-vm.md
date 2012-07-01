@@ -7,7 +7,7 @@ May 5, 2010, 1:39 pm
 
 # Installing Windows Server 2008 R2 on a VM #
 
-I've just been installing Windows Server 2008 R2 onto a virtual machine: since it's freely available from [Dreamspark](http://www.dreamspark.com)  (thanks, [Mike Borodizn](http://twitter.com/mikeborozdin), and is easy to convert to a workstation that's a bit lighter and faster than Windows 7 (apparently). It also seems to run all the games I want to play, along with the software I regularly use (Dreamweaver and Photoshop). Sooo, I thought I'd put a brief howto together!
+I've just been installing Windows Server 2008 R2 onto a virtual machine, since it's freely available from [Dreamspark](http://www.dreamspark.com)  (thanks, [Mike Borodizn](http://twitter.com/mikeborozdin)), and is easy to convert to a workstation that's a bit lighter and faster than Windows 7 (apparently). It also seems to run all the games I want to play, along with the software I regularly use. Sooo, I thought I'd put a brief howto together!
 
 I'll be using VirtualBox for this, with a Vista 32-bit host, and installing Server 2008 R2 64-bit as the guest.
 

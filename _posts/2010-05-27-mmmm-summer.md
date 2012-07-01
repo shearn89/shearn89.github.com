@@ -7,7 +7,7 @@ May 27, 2010, 2:10 pm
 
 # Mmmm, summer... #
 
-Sooo, I finished exams last Wednesday, and have only just emerged from a haze of sunshine, bbqs, and drinking. It's been totally epic: CompSoc mini-bbq on Wednesday afternoon, all day in the Meadows on Thursday, same again on Friday. Couple of more chilled days Saturday/Sunday, then a brilliant 21st party up in Kinross on Monday/Tuesday.
+Sooo, I finished exams last Wednesday, and have only just emerged from a haze of sunshine and bbqs. It's been totally epic: CompSoc mini-bbq on Wednesday afternoon, all day in the Meadows on Thursday, same again on Friday. Couple of more chilled days Saturday/Sunday, then a brilliant 21st party up in Kinross on Monday/Tuesday.
 
 It's been pretty brilliant, and an awesome end to the year - getting to see everyone and just hang out has easily been the best bit, and the fantastic weather simply makes it better. I've now got about 4 days to tidy, pack, and clean the flat, and then I'm back off down south on Monday (31st). Back to rainy Marlborough...
 

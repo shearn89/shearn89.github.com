@@ -9,7 +9,7 @@ May 18, 2011, 00:33
 
 [So nearly there](http://howlonguntil.com/may/21/2011/04:30pm), I can taste it...
 
-So, 2 exmas left. Literally can't wait for the week after: I plan to get nice and drunk, and generally just chill out. It's even more awesome that there's a huge number of awesome events on after exams:
+So, 2 exams left. Literally can't wait for the week after: I plan to celebrate, and then generally just chill out. It's even more awesome that there's a huge number of awesome events on after exams:
 
 1. Big Cheese/Hospitality
 1. Crookers
