@@ -1,4 +1,0 @@
-pygments: true
-permalink: /posts/:title
-server: true
-auto: true
