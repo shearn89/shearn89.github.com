@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .sass-cache
 *.psd
 _site
@@ -5,3 +6,15 @@ _site
 *_backup*
 *.swp
 *.bak
+=======
+_site/*
+_theme_packages/*
+
+Thumbs.db
+.DS_Store
+
+!.gitkeep
+
+.rbenv-version
+.rvmrc
+>>>>>>> develop
