@@ -9,7 +9,7 @@ Welcome to my blog. Here is where I write out about anything I feel like, be it 
 
 ## Posts
 
-Here's a sample "posts list".
+Latest posts:
 
 <ul class="posts">
   {% for post in site.posts %}
