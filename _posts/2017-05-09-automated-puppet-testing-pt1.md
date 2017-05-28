@@ -4,6 +4,9 @@ title: Automated Puppet Testing (Pt. I)
 ---
 {% include JB/setup %}
 
+* TOC
+{:toc}
+
 # Introduction #
 
 I've recently been working more on a Puppet project of mine: [toughen](https://github.com/shearn89/puppet-toughen). It's designed to be a flexible module for system hardening, as I've worked on a few different projects that need hardening via Puppet and haven't been happy with any of the modules so far.
@@ -17,7 +20,7 @@ This series of posts will cover the work I've been doing testing my modules: thi
 Unit testing is done primarily using `rspec-puppet`.
 
 # Basic Resource Unit Testing #
-
+## First Failure ##
 So, how have I done the unit testing? I find learning by example easiest, so we'll start with that. *NB: the full code for this is available [on github](https://github.com/shearn89/puppet-helloworld)*.
 
 Generate a simple 'helloworld' module:
@@ -75,7 +78,11 @@ Now, if you execute `bundle exec rake test`, you should see:
     Finished in 0.12021 seconds (files took 0.66718 seconds to load)
     1 example, 0 failures
 
-We've run our first test! Interesting but not very functional. In true TDD-style we'll start by adding the tests and then making everything green. We want our simple class to say 'hello' to the user. Open up `spec/classes/spec_init.rb`:
+We've run our first test! Interesting but not very functional. In true TDD-style we'll start by adding the tests and then making everything green.
+
+## Adding Classes ##
+
+We want our simple class to say 'hello' to the user. Open up `spec/classes/spec_init.rb`:
 
     require 'spec_helper'
     describe 'helloworld' do
@@ -125,7 +132,9 @@ If you save and close the file, and run the `bundle exec rake test` command agai
     
     /usr/bin/ruby2.3 -I/home/shearna/repos/helloworld/vendor/bundle/ruby/2.3.0/gems/rspec-core-3.6.0/lib:/home/shearna/repos/helloworld/vendor/bundle/ruby/2.3.0/gems/rspec-support-3.6.0/lib /home/shearna/repos/helloworld/vendor/bundle/ruby/2.3.0/gems/rspec-core-3.6.0/exe/rspec --pattern spec/\{aliases,classes,defines,unit,functions,hosts,integration,type_aliases,types\}/\*\*/\*_spec.rb --color failed
 
-Woah! Lets go through this:
+Woah! Lets go through this...
+
+## Working through errors ##
 
 * We ran the command
 * The `metadata.json` linter says we have an open-ended version requirement, which we should probably pin down. Depends on use case really. I'll ignore it for now.
@@ -136,7 +145,9 @@ Woah! Lets go through this:
 * Details of the failure
 * Summary of the failures
 
-So, reading through all that, we can see that in `spec/classes/init_spec.rb`, at line 5, our test failed. Lets fix it! Open up `manifests/init.pp` and add:
+So, reading through all that, we can see that in `spec/classes/init_spec.rb`, at line 5, our test failed. Lets fix it!
+
+Open up `manifests/init.pp` and add:
 
     class helloworld {
       notifi { "hello puppet users!": }
