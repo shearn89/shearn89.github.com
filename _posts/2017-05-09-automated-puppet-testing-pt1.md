@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Automated Puppet Testing (Pt. I)
+description: "First part of a series on automated testing with Puppet, using RSpec."
+category: technical
+tags: puppet automation testing
 ---
 {% include JB/setup %}
 

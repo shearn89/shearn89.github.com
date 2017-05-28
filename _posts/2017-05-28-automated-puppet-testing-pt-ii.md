@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Automated Puppet Testing (Pt. II)
+description: "Second part of a series on automated testing with Puppet, using RSpec."
+category: technical
+tags: puppet automation testing
 ---
 
 * TOC
