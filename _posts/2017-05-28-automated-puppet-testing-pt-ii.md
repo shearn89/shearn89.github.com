@@ -5,6 +5,7 @@ description: "Second part of a series on automated testing with Puppet, using RS
 category: technical
 tags: puppet automation testing
 ---
+{% include JB/setup %}
 
 * TOC
 {:toc}
