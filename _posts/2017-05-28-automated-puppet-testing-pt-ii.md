@@ -95,7 +95,7 @@ Scrolling further up:
          Failure/Error: it { should contain_file_line('postfix-local-only') }
          
          Puppet::PreformattedError:
-           Evaluation Error: Error while evaluating a Resource Statement, Unknown resource type: 'file_line' at /home/shearna/repos/helloworld/spec/fixtures/modules/helloworld/manifests/postfix.pp:4:3 on node bowan-shearna.home
+           Evaluation Error: Error while evaluating a Resource Statement, Unknown resource type: 'file_line' at /home/shearna/repos/helloworld/spec/fixtures/modules/helloworld/manifests/postfix.pp:4:3 on node boris-shearna.home
 
 Okay, that makes more sense. What it's saying is that the test hasn't passed becase the resource type `file_line` isn't available. That's because we need to tell RSpec there's a dependency! First, create a file in the root of your repository called `.fixtures.yml`. Mine looks like this:
 
@@ -115,7 +115,7 @@ Useful if you're worried about compatibility (even more so now Puppet 3 is offic
 
 Okay, with that done, let's try our tests again:
 
-    shearna@bowan-shearna:~/repos/helloworld$ bert
+    shearna@boris-shearna:~/repos/helloworld$ bert
     Warning: Dependency puppetlabs-stdlib has an open ended dependency version requirement >= 1.0.0
     ---> syntax:manifests
     ---> syntax:templates

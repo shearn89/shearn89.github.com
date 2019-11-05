@@ -174,7 +174,7 @@ We now get a lot more error output. Above one of the stack traces, we get:
          Failure/Error: it { should contain_class('helloworld') }
          
          Puppet::PreformattedError:
-           Evaluation Error: Error while evaluating a Resource Statement, Unknown resource type: 'notifi' at /home/shearna/repos/helloworld/spec/fixtures/modules/helloworld/manifests/init.pp:46:3 on node bowan-shearna
+           Evaluation Error: Error while evaluating a Resource Statement, Unknown resource type: 'notifi' at /home/shearna/repos/helloworld/spec/fixtures/modules/helloworld/manifests/init.pp:46:3 on node boris-shearna
 
 This says that (essentially) there's a typo in our manifest: we put 'notifi' when we should have put 'notify'. Fix it and run again:
 
