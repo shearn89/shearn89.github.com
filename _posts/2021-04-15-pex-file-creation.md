@@ -7,8 +7,6 @@ tags: [blog]
 ---
 {% include JB/setup %}
 
-# Creating a PEX binary from Python scripts #
-
 This tutorial walks through creating a self-contained PEX binary from a set of
 python scripts. The main reason I wrote this is that Python 2 is now end-of-life,
 so we should be writing Python 3 scripts. However, Python3 on Centos 7 is old,
