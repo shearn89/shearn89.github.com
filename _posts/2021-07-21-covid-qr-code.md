@@ -19,11 +19,11 @@ With that out the way, lets dig in.
 
 The form has a QR code right at the top. Here's a screenshot of mine, with some scribbles to redact it - there's a lot of personal info in these!
 
-<img src="/assets/images/passenger-locator-form.png" width="630">
+![Screenshot of QR Code](/assets/images/passenger-locator-form.png)
 
 Scanning this with a reader brought back a large string (again, redacted):
 
-<img src="/assets/images/passenger-qr-code-data.png" width="250">
+![Screenshot of data](/assets/images/passenger-qr-code-data.png)
 
 This looked a lot like base64 to me, so I copied the text and ran it through a decoder:
 
