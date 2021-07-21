@@ -18,3 +18,5 @@ Progress has been pretty good - I've typed all this in the layout, and although 
 The hardest part for me has been getting used to Vim in a new layout - no matter that I know the commands are all verbs, my brain remembers them in their QWERTY places! Very confusing.
 
 I'm going to persevere with it and see what sort of speeds I can get up to, I'm hoping that if I can stick to typing "properly" and keeping my fingers on the home row then I should be able to get way faster than I was before! I'll try and update this with progress in a few months!
+
+./A

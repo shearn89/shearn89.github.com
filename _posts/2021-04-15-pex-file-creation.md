@@ -340,3 +340,5 @@ hello from the extra function
 Hopefully this has helped someone! If not, at least it's here for my own reference.
 I find this is the sort of task I do a few times on a project but then don't have to
 do again for ages, and I always forget the details...
+
+./A

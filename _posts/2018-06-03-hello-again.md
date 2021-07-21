@@ -24,3 +24,5 @@ Other goals for this year? I'd like to get some certifications under my belt. I'
 I'd also like to branch out from automation a bit. I might start dabbling with Node.js and try to build some simple web-apps, purely for the experience. I find I learn a whole lot better when I've a project to do rather than when I'm just reading and not doing!
 
 That's all for now. Here's hoping it won't be 12 months 'til my next post... O_O
+
+./A
