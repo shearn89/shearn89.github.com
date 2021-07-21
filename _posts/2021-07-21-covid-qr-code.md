@@ -70,8 +70,8 @@ This was kinda cool. It looks like we have a full copy of the passenger locator 
 * `fn` - first names. This actually had all my names, I've removed some here.
 * `di` - this was my passport number, so maybe 'document id'?
 * `tg` - this is a list of any contact numbers you've put on the form, with country codes
-* `ac` - I think this stands for ????
-* `qa` - This is the (at least) first line of my address
+* `ac` - not sure on this one. There's a number of boolean fields in the form - could be "accommodation" indicating that home address is provided? Or could be "amber country" and some indication that quarantine is required...
+* `qa` - this is the (at least) first line of my address
 * `ad` - arrival date in the UK
 * `qe` - I think this stands for "quarantine exempt", so if you're e.g. a haulier you don't have to quarantine on arrival.
 * `rl` - Not sure on this one. I wondered if it was something to do with relatives, as you have to declare if this form includes any relatives or just yourself? Or it could be to do with test-to-release?
