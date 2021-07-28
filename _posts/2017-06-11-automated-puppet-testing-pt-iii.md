@@ -2,7 +2,7 @@
 layout: post
 title: Automated Puppet Testing (Pt. III)
 description: "Final part of a series on automated testing with Puppet, using Vagrant, r10k, and other tools."
-category: technical
+category: howto
 tags: puppet automation testing packer vagrant
 ---
 {% include JB/setup %}
