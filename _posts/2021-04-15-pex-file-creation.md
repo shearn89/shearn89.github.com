@@ -2,8 +2,8 @@
 layout: post
 title: "Building a PEX binary from Python Scripts"
 description: ""
-category: 
-tags: [blog]
+category: technical
+tags: [blog, howto, python]
 ---
 {% include JB/setup %}
 

@@ -2,8 +2,8 @@
 layout: post
 title: "Covid and QR Codes"
 description: "Quick post about decoding the UK passenger locator form data"
-category: 
-tags: []
+category: technical
+tags: [blog, covid, data, exploration]
 ---
 {% include JB/setup %}
 

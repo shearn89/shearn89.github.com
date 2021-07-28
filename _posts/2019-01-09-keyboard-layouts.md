@@ -2,8 +2,8 @@
 layout: post
 title: "Learning a new keyboard layout"
 description: ""
-category: 
-tags: [blog]
+category: other
+tags: [nontech blog]
 ---
 {% include JB/setup %}
 

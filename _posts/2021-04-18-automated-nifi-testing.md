@@ -2,8 +2,8 @@
 layout: post
 title: "Automating NiFi flow testing with Docker and Python"
 description: ""
-category: 
-tags: []
+category: technical
+tags: [blog, automation, nifi, docker, python]
 ---
 {% include JB/setup %}
 

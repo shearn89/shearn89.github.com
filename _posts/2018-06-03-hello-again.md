@@ -2,7 +2,7 @@
 layout: post
 title: "We meet again..."
 description: ""
-category: 
+category: other
 tags: nontech blog
 ---
 {% include JB/setup %}
