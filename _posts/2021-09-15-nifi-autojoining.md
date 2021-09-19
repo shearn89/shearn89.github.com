@@ -35,8 +35,9 @@ Set up `login-identity-providers.xml` for your IPA config, using the usual setti
     <property name="Url">ldaps://ipa.dev.shearn89.com:636</property>
     <property name="User Search Base">cn=accounts,dc=dev,dc=shearn89,dc=com</property>
     <property name="User Search Filter">uid={0}</property>
+    <property name="Identity Strategy">USE_DN</property>
 
-This means users can login with a bare username and it'll work fine.
+This means users can login with a bare username and it'll work fine, and get mapped to the DN.
 
 ## Authorizers Setup ##
 
