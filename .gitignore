@@ -12,3 +12,6 @@ Gemfile.lock
 
 .bundle/
 vendor/
+
+resources/_gen
+public/

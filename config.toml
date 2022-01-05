@@ -1,0 +1,84 @@
+baseURL = "http://example.org/"
+title = "shearn89.com"
+theme = "LoveIt"
+
+[params]
+  version = "0.2.X"
+  defaultTheme = "auto"
+  gitRepo = "https://github.com/shearn89/shearn89.github.com"
+  fingerprint = "sha256"
+  dateFormat = "2006-01-02"
+  googleAnalytics = "UA-22472855-1"
+  [params.home]
+    # amount of RSS pages
+    rss = 10
+    # Home page profile
+    [params.home.profile]
+      enable = true
+      gravatarEmail = ""
+      avatarURL = "/images/doom-headshot.png"
+      title = "shearn89.com"
+      subtitle = "My home away from $HOME"
+      typeit = true
+      social = true
+      disclaimer = ""
+    [params.home.posts]
+      enable = true
+      paginate = 6
+  [params.social]
+    GitHub = "shearn89"
+    Linkedin = "alexshearn"
+    Twitter = "shearn89"
+    Stackoverflow = "216695/shearn89"
+    Spotify = "shearn89"
+    RSS = true
+  [params.typeit]
+    speed = 100
+    cursorSpeed = 1000
+    cursorChar = "|"
+    duration = -1
+  [params.analytics]
+    enable = true
+    [params.analytics.google]
+      id = "UA-22472855-1"
+      anonymizeIP = true
+
+[author]
+  name = "Alex Shearn"
+
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    # you can add extra information before the name (HTML format is supported), such as icons
+    pre = ""
+    # you can add extra information after the name (HTML format is supported), such as icons
+    post = ""
+    name = "Posts"
+    url = "/posts/"
+    # title will be shown when you hover on this menu link
+    title = ""
+    weight = 1
+  [[menu.main]]
+    identifier = "tags"
+    pre = ""
+    post = ""
+    name = "Tags"
+    url = "/tags/"
+    title = ""
+    weight = 2
+  [[menu.main]]
+    identifier = "categories"
+    pre = ""
+    post = ""
+    name = "Categories"
+    url = "/categories/"
+    title = ""
+    weight = 3
+
+# Markup related configuration in Hugo
+[markup]
+  # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
+  [markup.highlight]
+    # false is a necessary configuration (https://github.com/dillonzq/LoveIt/issues/158)
+    noClasses = false
+
