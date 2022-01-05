@@ -2,7 +2,7 @@ version: 0.2
 phases:
   install:
     commands:
-      - go install https://github.com/gohugoio/hugo.git
+      - go install github.com/gohugoio/hugo@latest
   build:
     commands:
       - hugo
