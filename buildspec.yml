@@ -7,7 +7,7 @@ phases:
       - 'goenv local 1.17.5'
   build:
     commands:
-      - 'go get github.com/gohugoio/hugo'
+      - 'go install --tags extended github.com/gohugoio/hugo@latest'
       - 'hugo'
 artifacts:
   files:
