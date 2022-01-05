@@ -2,12 +2,13 @@ version: 0.2
 phases:
   install:
     commands:
-      - goenv install 1.17.5
-      - goenv local 1.17.5
-      - go get github.com/gohugoio/hugo
+      - 'cd $HOME/.goenv && git pull --ff-only && cd -'
+      - 'goenv install 1.17.5'
+      - 'goenv local 1.17.5'
   build:
     commands:
-      - hugo
+      - 'go get github.com/gohugoio/hugo'
+      - 'hugo'
 artifacts:
   files:
     - public/*

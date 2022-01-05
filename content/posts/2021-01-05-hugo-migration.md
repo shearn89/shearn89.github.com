@@ -13,7 +13,8 @@ categories:
 - other
 
 toc: false
-featuredImage: ""
+featuredImage: "/images/hugo-logo.png"
+featuredImagePreview: "/images/hugo-logo-preview.png"
 ---
 I decided to update the blog, only to discover that Jekyll is now quite old, the framework around it that I used is not maintained, and generally could do with a change.
 <!--more-->
@@ -46,4 +47,4 @@ unrecognized import path "io/fs": import path does not begin with hostname
 [Container] 2022/01/05 16:38:15 Phase complete: INSTALL State: FAILED
 ```
 
-Based on [this GitHub comment](https://github.com/aws/aws-codebuild-docker-images/issues/425#issuecomment-858179595), it looks like it's because CodeBuild uses an old version of Go. Adding the recommended commands to my `buildspec.yml` 
+Based on [this GitHub comment](https://github.com/aws/aws-codebuild-docker-images/issues/425#issuecomment-861921069), it looks like it's because CodeBuild uses an old version of Go. Adding the recommended commands to my `buildspec.yml`
