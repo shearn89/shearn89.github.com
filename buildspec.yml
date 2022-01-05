@@ -2,6 +2,8 @@ version: 0.2
 phases:
   install:
     commands:
+      - goenv install 1.17.5
+      - goenv local 1.17.5
       - go get github.com/gohugoio/hugo
   build:
     commands:
