@@ -76,3 +76,14 @@ Total in 311 ms
 
 [Container] 2022/01/05 17:14:11 Command did not exit successfully hugo exit status 255
 ```
+
+The solution to this was on the Hugo website. I had to modify the tag I pulled from github:
+
+```
+      - 'go install --tags extended github.com/gohugoio/hugo@latest'
+```
+
+...which then worked! I ended up with a successful build and something in an S3 bucket!
+
+
+## Tuning up the Output
