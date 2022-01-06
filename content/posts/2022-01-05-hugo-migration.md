@@ -114,12 +114,6 @@ Nothing I did made a difference! I have yet to find the answer. In then end a ne
 
 So even after setting all that up, I was still getting an XML `Access Denied` message from CloudFront. This turned out to be a typo in the 'default root object' (as far as I could tell) - when I re-ran the build to create all the files, and removed the leading slash from the root object (`/index.html` -> `index.html`) it all sprang into life!
 
-## Site Testing
-
-After getting the CloudFront distribution working and setting up the OAI, I wanted to run do some quick checks to make sure that things were secure and working as intended, before going back over doing it all with CloudFormation.
-
-I wanted to check that the S3 bucket was definitely not accessible, and the new distribution was. I also wanted to check that it was using HTTPS and redirecting HTTP. All of these worked fine! I used AWS Config to enforce public access settings on the bucket, and some simple browser tests worked for the redirects.
-
 ## CI/CD
 
 I wanted the site to build automatically, rather than requiring me to run the build. CodeBuild needed a trigger! I created a CodePipeline that used GitHub as a source, and my existing CodeBuild project as the build stage. I made sure to tick the 'Full Clone' option so that the build would actually be able to run as it had submodules. I skipped the Deploy stage.
@@ -127,6 +121,44 @@ I wanted the site to build automatically, rather than requiring me to run the bu
 When it first ran, it failed - this was because the service role that I had previously set up for the CodeBuild project did not have permissions to use the connection to GitHub that Pipelines configured. I had to modify the role and add the `codestar-connections:UseConnection` permission.
 
 With that done, I re-ran the pipeline and could see the build running! Success! I then merged into `main` and update CodeBuild to work off that branch rather than the feature branch.
+
+## Site Testing
+
+After getting the CloudFront distribution working and setting up the OAI, I wanted to run do some quick checks to make sure that things were secure and working as intended, before going back over doing it all with CloudFormation.
+
+I wanted to check that the S3 bucket was definitely not accessible, and the new distribution was. I also wanted to check that it was using HTTPS and redirecting HTTP. All of these worked fine! I used AWS Config to enforce public access settings on the bucket, and some simple browser tests worked for the redirects.
+
+However, I was getting `403` errors on child pages. It turns out this is a [documented issue](https://discourse.gohugo.io/t/how-to-force-index-html-in-all-a/5059/7), the solution to which is to turn **on** S3 static hosting and then use custom headers... Bit of a backwards step, but I suppose it makes sense! So...
+
+## Reconfiguring the Distribution
+
+After some research, I found that CloudFront has a 'Functions' capability, and this could be a good way to solve the problem. I really didn't want to make the bucket public, and relying on a header and possibly having to rotate it felt clunky. In the future, I'd hope that CloudFront supports this feature natively with as little config as the root object does...
+
+Anyway, thanks to [this SO post](https://stackoverflow.com/a/69157535/216695), I created a CloudFront Function:
+
+```javascript
+function handler(event) {
+    var request = event.request;
+    var uri = request.uri;
+    
+    // Check whether the URI is missing a file name.
+    if (uri.endsWith('/')) {
+        request.uri += 'index.html';
+    } 
+    // Check whether the URI is missing a file extension.
+    else if (!uri.includes('.')) {
+        request.uri += '/index.html';
+    }
+
+    return request;
+}
+```
+
+I called this `single-page-url-rewrite`. Saved it and published it from the 'Functions' section in the left menu of CloudFront.
+
+I then edited the default behaviour of my distribution, and changed the `Viewer request` function association to my new function. Once it had deployed, it worked flawlessly!
+
+All I then had to do was to reconfigure GitHub pages and Route53 DNS, and my new site (this one) was ready to go!
 
 ## Conclusion
 
