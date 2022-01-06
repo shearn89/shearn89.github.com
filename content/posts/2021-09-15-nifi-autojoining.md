@@ -115,3 +115,5 @@ Lastly for certificate-based auth (i.e. the nifi nodes themselves), we specify t
 ## Results ##
 
 With all this configured, start up your cluster. You should be able to login with the initial admin, go to 'Users', and see a list of all hosts in a nice sensible format. The hostgroup should appear, and all nodes should be able to talk to each other and form the cluster. If you now build a new node, it should automatically be able to join the cluster with no intervention from yourself!
+
+./A
