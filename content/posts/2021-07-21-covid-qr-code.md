@@ -31,7 +31,7 @@ Scanning this with a reader brought back a large string (again, redacted):
 
 This looked a lot like base64 to me, so I copied the text and ran it through a decoder:
 
-```
+```sh
 $ cat qrcode.txt | base64 --decode
 {"ts":"2021-07-17T08:02:00Z","id": ... }
 ```
@@ -40,8 +40,11 @@ $ cat qrcode.txt | base64 --decode
 
 So, I ran it through JQ so my eyes didn't hurt:
 
-```
+```sh
 $ cat qrcode.txt | base64 --decode | jq
+```
+producing
+```json
 {
   "ts": "2021-07-17T08:02:00Z",
   "id": "c8e935cb-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -92,7 +95,7 @@ So some interesting fields here! Also why you should probably avoid posting any 
 
 This looked to me like some kind of signature that is used to integrity check the data. Dumping it as hex reveals something that looks like it's got a couple of layers:
 
-```
+```sh
 $ cat sn_field | xxd
 00000000: 3044 0220 0e1f df3d 28xx xxxx xxxx xxxx  0D. ............
   ... snip ...
@@ -108,7 +111,7 @@ I sort of lost interest here as I'm assuming that the key is not stored with the
 
 I expect that what happens is that Border Force scan the QR Code which gets decoded by their systems, and the system removes this `sn` field and then uses it to integrity check the rest of the data. For example:
 
-```
+```sh
 $ cat <<EOF> testfile.json
 { "foo": "bar" }
 $ cat testfile.json | sha1sum
@@ -117,7 +120,7 @@ $ cat testfile.json | sha1sum
 
 So our actual data structure could be:
 
-```
+```sh
 {
   "foo": "bar",
   "sn": "15abb9bce7cf6dc65ab2f6bc6aebfd406448434b"

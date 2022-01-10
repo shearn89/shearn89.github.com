@@ -24,7 +24,7 @@ libraries, the situation is more manageable!
 
 First we create our repo with a very basic script.
 
-```
+```sh
 $ mkdir pex-test
 $ cd pex-test
 $ pip install --user virtualenv
@@ -51,14 +51,14 @@ EOF
 
 Then we set up the `requirements` file:
 
-```
+```sh
 $ echo 'requests' > requirements.txt
 $ pip install -r requirements.txt
 ```
 
 ...and then we test our script:
 
-```
+```sh
 $ python main.py
 hello world
 ```
@@ -80,7 +80,7 @@ setup(
 
 Now, we can attempt to create our binary and see if it works:
 
-```
+```sh
 $ pex . -r requirements.txt -c main.py -o test.pex
 $ ./test.pex
 hello world
@@ -92,7 +92,7 @@ It works! A good start. Lets make it more complicated and add some other modules
 
 We'll create a simple package and add some very simple extra modules & methods to it.
 
-```
+```sh
 $ mkdir importTest
 $ touch importTest/__init__.py
 $ cat <EOF>>importTest/hello.py
@@ -118,7 +118,7 @@ if __name__=="__main__":
 
 If we run the script, we should now see it call the extra method:
 
-```
+```sh
 $ python main.py
 hello world
 hello foo
@@ -126,7 +126,7 @@ hello foo
 
 So, lets build and test our pex again:
 
-```
+```sh
 $ pex . -r requirements.txt -c main.py -o test.pex
 $ ./test.pex
 Traceback (most recent call last):
@@ -172,7 +172,7 @@ adding the info here for future personal reference, or for googlers who stop by.
 
 Let's now add another module `goodbye` to our package.
 
-```
+```sh
 $ cat <EOF>>importTest/goodbye.py
 def goodbye():
   print("goodbye")
@@ -193,7 +193,7 @@ if __name__=="__main__":
 
 And run it to test:
 
-```
+```sh
 $ python importTest/hello.py
 hello foo
 goodbye
@@ -201,7 +201,7 @@ goodbye
 
 But, if we run the same thing from `main`:
 
-```
+```sh
 $ python main.py
 Traceback (most recent call last):
   File "main.py", line 3, in <module>
@@ -214,7 +214,7 @@ ModuleNotFoundError: No module named 'goodbye'
 So how do we fix this? First I tried to update `__init__.py` to include the 
 script in the package:
 
-```
+```sh
 $ echo 'from importTest import hello,goodbye' > importTest/__init__.py
 ```
 
@@ -236,7 +236,7 @@ if __name__=="__main__":
 But that also didn't work! Okay, let's try using the from-import
 syntax in hello.py:
 
-```
+```sh
 $ cat importTest/hello.py
 from importTest import goodbye
 
@@ -250,7 +250,7 @@ if __name__=="__main__":
 
 ...and test:
 
-```
+```sh
 $ python main.py
 hello world
 hello foo
@@ -263,7 +263,7 @@ loads modules/packages.
 
 So then the pex file:
 
-```
+```sh
 $ pex . -r requirements.txt -c main.py -o test.pex && ./test.pex
 hello world
 hello foo
@@ -279,7 +279,7 @@ bunch of python files!
 Lastly, if you **do** want to have top-level scripts, you just need to add them as
 modules in setup.py:
 
-```
+```sh
 cat <EOF>>extras.py
 def extraFunction():
   print("hello from the extra function")
@@ -318,7 +318,7 @@ setup(
 
 Then test and run:
 
-```
+```sh
 $ python main.py
 hello world
 hello foo
@@ -328,7 +328,7 @@ hello from the extra function
 
 Which is good! So finally:
 
-```
+```sh
 $ pex . -r requirements.txt -c main.py -o test.pex && ./test.pex
 hello world
 hello foo

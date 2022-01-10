@@ -26,7 +26,7 @@ This post will serve as a reminder for myself in the future!
 
 We need to create an IPA automember rule to add any NiFi hosts to a particular group. This is quick and easy:
 
-```
+```sh
 ipa hostgroup-add --desc="nifi nodes" nifi
 ipa automember-add --type=hostgroup nifi
 ipa automember-add-condition --type=hostgroup nifi --inclusive-regex='nifi-\d+' --key=fqdn
@@ -91,7 +91,7 @@ We use normalization rules in `nifi.properties` to get everything working. This 
 
 The normalization:
 
-```
+```sh
 ### LDAP USER
 nifi.security.identity.mapping.pattern.user=^uid=(.*?),cn=users,cn=accounts,dc=dev,dc=shearn89,dc=com
 nifi.security.identity.mapping.value.user=$1@DEV.SHEARN89.COM

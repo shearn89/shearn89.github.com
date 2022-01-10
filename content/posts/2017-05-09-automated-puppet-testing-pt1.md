@@ -31,13 +31,13 @@ So, how have I done the unit testing? I find learning by example easiest, so we'
 
 Generate a simple 'helloworld' module:
 
-```
+```bash
 $> puppet module generate helloworld
 ```
 
 That gives us a nice template to start with:
 
-```
+```bash
 ~/repos/helloworld$ tree
 .
 ├── examples
@@ -58,22 +58,22 @@ That gives us a nice template to start with:
 
 Now, set up the repo for testing:
 
-```
+```bash
 $> bundle install --path vendor/bundle
 ```
 We'll need to edit the Rakefile to exclude the newly-created vendor folder:
-```
+```bash
 $> vim Rakefile
 ...
 PuppetLint.configuration.ignore_paths = ['spec/**/*.pp', 'pkg/**/*.pp']
 ```
 becomes...
-```
+```bash
 PuppetLint.configuration.ignore_paths = ['spec/**/*.pp', 'pkg/**/*.pp', 'vendor/**/*']
 ```
 Now, if you execute `bundle exec rake test`, you should see:
 
-```
+```bash
 ~/repos/helloworld$ bundle exec rake test
 Warning: Dependency puppetlabs-stdlib has an open ended dependency version requirement >= 1.0.0
 ---> syntax:manifests
@@ -118,7 +118,7 @@ end
 ```
 If you save and close the file, and run the `bundle exec rake test` command again, you'll see the following:
 
-```
+```bash
 ~/repos/helloworld$ bundle exec rake test
 Warning: Dependency puppetlabs-stdlib has an open ended dependency version requirement >= 1.0.0
 ---> syntax:manifests
@@ -173,7 +173,7 @@ class helloworld {
 ```
 Then run the tests again. Slight difference:
 
-```
+```bash
 ~/repos/helloworld$ bundle exec rake test
 Warning: Dependency puppetlabs-stdlib has an open ended dependency version requirement >= 1.0.0
 manifests/init.pp - WARNING: double quoted string containing no variables on line 46
@@ -187,7 +187,7 @@ class helloworld {
 ```
 We now get a lot more error output. Above one of the stack traces, we get:
 
- ```
+ ```bash
   1) helloworld with default values for all parameters should contain Class[helloworld]
      Failure/Error: it { should contain_class('helloworld') }
      
@@ -196,7 +196,7 @@ We now get a lot more error output. Above one of the stack traces, we get:
 ```
 This says that (essentially) there's a typo in our manifest: we put 'notifi' when we should have put 'notify'. Fix it and run again:
 
-```
+```bash
 ~/repos/helloworld$ bundle exec rake test
 Warning: Dependency puppetlabs-stdlib has an open ended dependency version requirement >= 1.0.0
 ---> syntax:manifests

@@ -40,7 +40,7 @@ First, install [Packer](https://www.packer.io/). When you're done, come back her
 
 You'll want to create 2 things to start with: a folder to serve Kickstart/Preseed files from, and a JSON file with the configuration:
 
-```
+```sh
 $> cd puppet-helloworld
 $> mkdir -p ci/packer/http
 $> cd ci/packer
@@ -49,7 +49,7 @@ $> touch centos-7.json
 
 Nice and simple so far. Also make sure Packer is correctly installed:
 
-```
+```sh
 $> packer --help
 $> Usage: packer [--version] [--help] <command> [<args>]
 
@@ -61,7 +61,7 @@ Available commands are:
 
 Okay! Lets start doing something with it. Firstly, you're going to need a [builder](https://www.packer.io/docs/builders/virtualbox.html) - we'll be using the VirtualBox one to create Vagrant images, but Packer itself can build images for a long list of other providers (OpenStack, Docker, Amazon EC2, Google Cloud, Azure...). Specifically, we're using the `virtualbox-iso` builder, which takes an ISO image and turns it into a provisionable image. There's a minimum set of parameters to this, but that wouldn't actually work. In order to build something that will actually... er, build... we have to put in at a minimum:
 
-````
+````json
 {
   "builders": [{
     "name": "centos73",
@@ -109,7 +109,7 @@ So, what have we got here?
 
 Phew! Okay, so we've written our iniital config. Lets have a stab at running it and see what happens. Before we do, change that `headless` setting to `false`, so we can see what's up:
 
-```
+```sh
 $> sed -i '/headless/ s/true/false/' centos-7.json 
 $> packer validate centos-7.json 
 Template validated successfully.
@@ -121,7 +121,7 @@ You'll see a reasonable amount of output now. To start with, it will download th
 
 On the first run with the config listed above, it took 7 minutes and timed out, saying:
 
-```
+```sh
 ==> Some builds didn't complete successfully and had errors:
 --> centos73: Timeout waiting for SSH.
 
@@ -140,7 +140,7 @@ You can see the Kickstart file I've used in the [example repo](https://github.co
 
 Okay, with that file created under `ci/packer/http`, lets see what happens now:
 
-```
+```sh
 $> packer build centos-7.json 
 centos73 output will be in this color.
 
@@ -182,7 +182,7 @@ Awesome! You can see that it's managed to connect to SSH, where in our example i
 
 Now we know the process is working, we'll start using the built-in provisioners that Packer provides to customise our box. We're simply going to use the `shell` provisioner to run a couple of scripts - the first sets up the box so that Vagrant works properly, the second installs Puppet.
 
-```
+```sh
 $> cd ci/packer/
 $> mkdir scripts
 $> cd scripts
@@ -212,7 +212,7 @@ This grabs the insecure vagrant key from the vagrant repo, and installs it, whic
 
 The second (`scripts/01-install-puppet.sh`) could be inline it's so short:
 
-```
+```bash
 #!/bin/bash -e
 
 sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
@@ -221,7 +221,7 @@ sudo yum install -y puppet
 
 So, nice and simple. Lets add those scripts into our JSON file. After the `builders` block, append a comma and insert the following before the final closing brace. With a bit of context:
 
-```
+```json
 {
   "builders": [{
       ...
@@ -240,7 +240,7 @@ So, nice and simple. Lets add those scripts into our JSON file. After the `build
 
 What this does is start the `provisioners` block and tell Packer that there is a list of shell scripts to run. You don't need to worry about uploading these to the box or anything, Packer handles all that! If we validate the config (important, given we've added new JSON stuff and it's easy to miss commas etc) and run the build, we should now see slightly different output:
 
-```
+```sh
 ==> centos73: Downloading or copying Guest additions
     centos73: Downloading or copying: file:///usr/share/virtualbox/VBoxGuestAdditions.iso
 ==> centos73: Downloading or copying ISO
@@ -252,13 +252,13 @@ Use the force flag to delete it prior to building.
 
 Woops - I need to delete the `builds` directory or use the `-force` flag. Lets try again:
 
-```
+```sh
 $> packer build -force centos-7.json
 ```
 
 This time, you'll see a LOT of output, as Packer builds the box and then runs the scripts we've configured. It should at the end say something like:
 
-```
+```sh
 ==> centos73: Gracefully halting virtual machine...
     centos73: Removing guest additions drive...
 ==> centos73: Preparing to export machine...
@@ -278,7 +278,7 @@ Excellent! We're nearly done with Packer - onto post-processors and packaging th
 
 Similarly to when we added the provisioner, we'll add another section to the JSON. With context, as before:
 
-```
+```json
 {
   "builders": [{
     ...
@@ -299,7 +299,7 @@ There's a double array here, and that's so that you can add additional post-proc
 
 Let's run the build again:
 
-```
+```sh
 $> packer build -force centos-7.json
     ... much output ...
 ==> centos73: Running post-processor: vagrant
@@ -323,7 +323,7 @@ Perfect - our post-processor has run, and we've created a Vagrant Box! We'll use
 
 So, we've created a box file to use in our Vagrantfile. Lets get started with Vagrant itself - I'll assume you've installed Vagrant as per [the instructions](https://www.vagrantup.com/intro/getting-started/install.html). With that done, create a new folder under our `ci` one and create the initial Vagrantfile:
 
-```
+```sh
 $> cd ci/
 $> mkdir vagrant
 $> cd vagrant/
@@ -338,7 +338,7 @@ the comments in the Vagrantfile as well as documentation on
 
 Open up the Vagrantfile and you'll see it's actually very well commented. Without the comments, it's just:
 
-```
+```ruby
 Vagrant.configure("2") do |config|
   config.vm.box = "base"
 end
@@ -372,7 +372,7 @@ end
 
 If we were to run `vagrant up` now, you'd see the following:
 
-```
+```sh
 $> vagrant up
 Bringing machine 'default' up with 'virtualbox' provider...
 ==> default: Box 'helloworld_centos73_virtualbox' could not be found. Attempting to find and install...
@@ -390,7 +390,7 @@ Couldn't open file /home/shearna/repos/helloworld/ci/vagrant/helloworld_centos73
 
 That's because we haven't added our `box` file. To do so:
 
-```
+```sh
 $> vagrant box add ../packer/helloworld_centos73_virtualbox.box  --name helloworld_centos73_virtualbox
 ==> box: Box file was not detected as metadata. Adding it directly...
 ==> box: Adding box 'helloworld_centos73_virtualbox' (v0) for provider: 
@@ -400,7 +400,7 @@ $> vagrant box add ../packer/helloworld_centos73_virtualbox.box  --name hellowor
 
 Now:
 
-```
+```sh
 $> vagrant up
 Bringing machine 'default' up with 'virtualbox' provider...
 ==> default: Importing base box 'helloworld_centos73_virtualbox'...
@@ -439,7 +439,7 @@ Bingo! However the box isn't doing a lot. To make best use of it, we need to def
 
 Do a quick `vagrant halt` just to shutdown the VM, and we'll add some provisioners in. We'll start with some simple `shell` and `file` provisioners: these run commnds/scripts and put files in place. We'll add to our Vagrantfile:
 
-```
+```ruby
 config.vm.provision "shell", inline: "yum update -y"
 config.vm.provision "shell", path: "scripts/01-setup-r10k.sh", name: "configure r10k"
 config.vm.provision "file", source: "Puppetfile", destination: "Puppetfile"
@@ -501,7 +501,7 @@ We've now added some basics that will be able to deploy our modules. However, we
 
 The `Puppetfile` looks like this:
 
-```
+```puppet
 mod 'puppetlabs-stdlib'
 
 mod 'shearn89/helloworld',
@@ -525,7 +525,7 @@ That's about as plain as it gets.
 
 Lets run what we've done so far and see what happens.
 
-```
+```sh
 $> vagrant up
 Bringing machine 'default' up with 'virtualbox' provider...
     ...
@@ -535,13 +535,13 @@ Bringing machine 'default' up with 'virtualbox' provider...
 
 Okay, because we previously did a `vagrant up` before we wrote the provisioning section, we need to destroy and recreate the VM, or force it to run the provisioners. In the interests of cleanliness, lets destroy and recreate:
 
-```
+```sh
 $> vagrant destroy -f
 ==> default: Forcing shutdown of VM...
 ==> default: Destroying VM and associated drives...
 ```
 
-```
+```sh
 $> vagrant up
     ...
 ==> default: Successfully installed r10k-2.5.5
@@ -563,7 +563,7 @@ $>
 
 Nice! If you do `vagrant ssh` you can poke around and see what we've done:
 
-```
+```sh
 $> vagrant ssh
 [vagrant@vagrant ~]$ ll
 total 12
@@ -589,7 +589,7 @@ All looks good. Let's get Puppet to run as a provisioner as well, and then we'll
 
 Okay, so final step! Vagrant can also run Puppet during it's provisioning phase, which we're now all set up to do. We'll add the following to the bottom of our Vagrantfile:
 
-```
+```ruby
 config.vm.provision "puppet" do |p| 
   p.manifest_file = "site.pp"
   p.manifests_path = "./"
@@ -602,7 +602,7 @@ This says that we're defining [another provisioner](https://www.vagrantup.com/do
 
 It should be that simple! Try the `vagrant up` again and check it exits gracefully:
 
-```
+```sh
 $> vagrant up
     ...
 ==> default: Running provisioner: puppet...

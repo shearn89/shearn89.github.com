@@ -29,7 +29,7 @@ Porting over to Hugo wasn't too painful, but I did have to dig into my chosen th
 
 Next issue was with the build - trying to get the Hugo Go module set up in CodeBuild was contentious. First it didn't like my `go install` syntax. Then I got this error:
 
-```
+```sh
 [Container] 2022/01/05 16:28:22 Entering phase INSTALL
 [Container] 2022/01/05 16:28:22 Running command go get github.com/gohugoio/hugo
 package github.com/pelletier/go-toml/v2: cannot find package "github.com/pelletier/go-toml/v2" in any of:
@@ -67,7 +67,7 @@ artifacts:
 
 However, I then got a different error:
 
-```
+```sh
 [Container] 2022/01/05 17:14:11 Running command hugo
 Start building sites … 
 hugo v0.91.2 linux/amd64 BuildDate=unknown
@@ -79,7 +79,7 @@ Total in 311 ms
 
 The solution to this was on the Hugo website. I had to modify the tag I pulled from github:
 
-```
+```yaml
       - 'go install --tags extended github.com/gohugoio/hugo@latest'
 ```
 
@@ -90,7 +90,7 @@ The solution to this was on the Hugo website. I had to modify the tag I pulled f
 
 At first the build was creating a directory structure to match the project name, but then losing the directory structure of the actual files. That was easily fixed by altering the `artifacts` section of the buildspec:
 
-```
+```yaml
 artifacts:
   files:
     - '**/*'

@@ -31,7 +31,7 @@ I'll work with an example from my system hardening module ["toughen"](https://gi
 There's a section of the system hardening module where I want to add a specific line to a config file for Postfix. I don't want to have to manage the entire file, especially when Postfix may not even be installed! Instead, I just want to make sure that (unless overridden) Postfix is listening to local interfaces only by default. This means if the package gets pulled in as a dependency or is installed as part of a default build, there's not an extra port listening on the network that could expose an attack vector.
 
 Specifically, I want to ensure that this line is present:
-```
+```sh
 inet_interfaces = localhost
 ```
 That's it! The Puppetlabs `stdlib` module provides an excellent tool for this. We could probably use augeas to do it (and the excellent providers from the [herculesteam](http://augeasproviders.com/) would be perfect for it), but we'll just use `stdlib`. There's a lot of other good tools in there: go read [the docs](https://forge.puppet.com/puppetlabs/stdlib)!
@@ -52,7 +52,7 @@ end
 ```
 Save and quit, and run `bundle exec rake test`. You might want to alias that: `alias bert='bundle exec rake test'`. As expected, failure:
 
-```
+```sh
 Finished in 0.16792 seconds (files took 0.67494 seconds to load)
 3 examples, 1 failure
 
@@ -82,7 +82,7 @@ This is pretty bare. Basically all it's saying is that in the file `/etc/postfix
 
 Now, run the tests again:
 
-```
+```sh
 Finished in 0.16711 seconds (files took 0.62496 seconds to load)
 3 examples, 1 failure
 
@@ -97,7 +97,7 @@ Huh, failed again...
 
 Scrolling further up:
 
-```
+```sh
 Failures:
 
   1) helloworld::postfix with default values for all parameters should contain File_line[postfix-local-only]
@@ -128,7 +128,7 @@ Useful if you're worried about compatibility (even more so now Puppet 3 is offic
 
 Okay, with that done, let's try our tests again:
 
-```
+```sh
 shearna@boris-shearna:~/repos/helloworld$ bert
 Warning: Dependency puppetlabs-stdlib has an open ended dependency version requirement >= 1.0.0
 ---> syntax:manifests
@@ -200,7 +200,7 @@ Okay, lets go through this first:
 
 We'll run the tests and see what the failure is:
 
-```
+```sh
 Failures:
 
   1) postfix_installed on linux should return true if installed
@@ -244,7 +244,7 @@ Nice and simple! We define a fact called `postfix_installed`, and specify that i
 
 If we run the test again, we'll see:
 
-```
+```sh
 /usr/bin/ruby2.3 -I/home/shearna/repos/helloworld/vendor/bundle/ruby/2.3.0/gems/rspec-core-3.6.0/lib:/home/shearna/repos/helloworld/vendor/bundle/ruby/2.3.0/gems/rspec-support-3.6.0/lib /home/shearna/repos/helloworld/vendor/bundle/ruby/2.3.0/gems/rspec-core-3.6.0/exe/rspec --pattern spec/\{aliases,classes,defines,unit,functions,hosts,integration,type_aliases,types\}/\*\*/\*_spec.rb --color
 .....
 
@@ -274,7 +274,7 @@ class helloworld::postfix {
 
 Note the `if` statement wrapping the declaration. If we run the tests now, it may well fail as the value of the fact while under test probably isn't defined:
 
-```
+```sh
 Finished in 0.18349 seconds (files took 0.6455 seconds to load)
 5 examples, 1 failure
 
@@ -303,7 +303,7 @@ end
 
 We've added some additional tests to confirm that it compiles with no changes, and 2 tests to check each value of the fact. If we run the tests now:
 
-```
+```sh
 /usr/bin/ruby2.3 -I/home/shearna/repos/helloworld/vendor/bundle/ruby/2.3.0/gems/rspec-core-3.6.0/lib:/home/shearna/repos/helloworld/vendor/bundle/ruby/2.3.0/gems/rspec-support-3.6.0/lib /home/shearna/repos/helloworld/vendor/bundle/ruby/2.3.0/gems/rspec-core-3.6.0/exe/rspec --pattern spec/\{aliases,classes,defines,unit,functions,hosts,integration,type_aliases,types\}/\*\*/\*_spec.rb --color
 ......
 
