@@ -165,4 +165,8 @@ All I then had to do was to reconfigure GitHub pages and Route53 DNS, and my new
 
 Quite a fun little project! I will revisit all of this through the lens of Infrastructure as Code - I'd normally do that as I go but given that I hadn't worked with CloudFront before (or GitHub connections into AWS) I wanted to do it by hand first. I shall port everything across to CloudFormation (or the [CDK](https://aws.amazon.com/cdk/)) and potentially redeploy it all!
 
+## Small update
+
+So I noticed that the build wasn't actually running properly under CodePipeline. It turns out that CodePipeline uses it's own Artifact storage bucket for passing things between stages. As I hadn't added a Deploy stage, the site wasn't updating - but when I ran the CodeBuild stage individually, it was! I've updated the pipeline so that it now has an `Amazon S3` deployment stage pointing at my bucket, and the CodeBuild stage will store artifacts in a seperate bucket (if run manually). I suppose I could set up a policy that means you can't run the CodeBuild job by hand, but that's a task for another day!
+
 ./A
