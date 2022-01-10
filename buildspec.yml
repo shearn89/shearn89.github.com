@@ -1,13 +1,13 @@
 version: 0.2
 phases:
-  #  install:
-  #    commands:
-  #      - 'cd $HOME/.goenv && git pull --ff-only && cd -'
-  #      - 'goenv install 1.17.5'
-  #      - 'goenv local 1.17.5'
+   install:
+     commands:
+       - 'cd $HOME/.goenv && git pull --ff-only && cd -'
+       - 'goenv install 1.17.5'
+       - 'goenv local 1.17.5'
   build:
     commands:
-      # - 'go install --tags extended github.com/gohugoio/hugo@latest'
+      - 'go install --tags extended github.com/gohugoio/hugo@latest'
       - 'git status; git log -1'
       - 'hugo -v'
 artifacts:
