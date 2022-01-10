@@ -9,7 +9,7 @@ phases:
     commands:
       # - 'go install --tags extended github.com/gohugoio/hugo@latest'
       - 'git status; git log -1'
-      - 'hugo'
+      - 'hugo -v'
 artifacts:
   files:
     - '**/*'
