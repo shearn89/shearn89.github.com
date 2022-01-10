@@ -169,4 +169,6 @@ Quite a fun little project! I will revisit all of this through the lens of Infra
 
 So I noticed that the build wasn't actually running properly under CodePipeline. It turns out that CodePipeline uses it's own Artifact storage bucket for passing things between stages. As I hadn't added a Deploy stage, the site wasn't updating - but when I ran the CodeBuild stage individually, it was! I've updated the pipeline so that it now has an `Amazon S3` deployment stage pointing at my bucket, and the CodeBuild stage will store artifacts in a seperate bucket (if run manually). I suppose I could set up a policy that means you can't run the CodeBuild job by hand, but that's a task for another day!
 
+Also, it turns out that the S3 deployment provider does the equivalent of `aws s3 cp`, not `sync`. This means that deletions are not reflected in the bucket! To fix this I had to create a CodeBuild project that did the sync for me. Not the cleanest solution, but it works okay.
+
 ./A
