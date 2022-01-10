@@ -11,6 +11,7 @@ featuredImage: "/images/hugo-logo.png"
 featuredImagePreview: "/images/hugo-logo-preview.png"
 draft: false
 title: Migration to Hugo
+slug: hugo-migration
 ---
 I decided to update the blog, only to discover that Jekyll is now quite old, the framework around it that I used is not maintained, and generally could do with a change.
 <!--more-->

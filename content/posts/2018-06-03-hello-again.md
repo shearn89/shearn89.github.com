@@ -9,6 +9,7 @@ tags:
 featuredImage: "/images/spiderman.jpg"
 title: We meet again...
 toc: false
+slug: hello-again
 ---
 Hello internet, my old friend...
 <!--more-->

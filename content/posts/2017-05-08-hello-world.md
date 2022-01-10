@@ -7,6 +7,7 @@ tags: []
 featuredImage: "/images/hello-world.jpg"
 title: Hello World!
 toc: false
+slug: hello-world
 ---
 
 This is the hot-off-the-press revamp of my blog. <!--more-->The old one was a bit out-dated, so I intend to start afresh, blogging about interesting technical stuff that I come across in my professional life. Tech articles, how-tos, problems I've encountered... The usual!

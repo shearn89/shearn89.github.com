@@ -2,6 +2,9 @@ baseURL = "http://example.org/"
 title = "shearn89.com"
 theme = "LoveIt"
 
+[permalinks]
+  posts = '/:year/:month/:day/:slug/'
+
 [params]
   version = "0.2.X"
   defaultTheme = "auto"

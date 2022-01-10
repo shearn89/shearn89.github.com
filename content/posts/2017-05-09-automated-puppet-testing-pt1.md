@@ -9,6 +9,7 @@ tags:
 - testing
 featuredImage: "/images/puppets.jpg"
 title: Automated Puppet Testing (Pt. I)
+slug: automated-puppet-testing-pt1
 ---
 How to get started with unit testing Puppet code, part 1 of 3.
 <!--more-->

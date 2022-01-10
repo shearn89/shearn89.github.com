@@ -9,6 +9,7 @@ tags:
 - nifi
 featuredImage: "/images/apache-nifi.png"
 title: NiFi Autojoining
+slug: nifi-autojoining
 ---
 
 Recently I've been building an Apache NiFi cluster in the cloud. I was looking into how I can configure NiFi to automatically add new nodes to it's cluster, based on using the `Node Group` property that's available within NiFi's `authorizers.xml` configuration file.

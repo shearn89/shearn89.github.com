@@ -12,6 +12,7 @@ tags:
 - vagrant
 featuredImage: "/images/puppets-2.jpg"
 title: Automated Puppet Testing (Pt. III)
+slug: automated-puppet-testing-pt-iii
 ---
 How to get started with unit testing Puppet code, part 3 of 3.
 <!--more-->

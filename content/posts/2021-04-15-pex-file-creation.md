@@ -9,6 +9,7 @@ tags:
 - python
 featuredImage: "/images/package.png"
 title: Building a PEX binary from Python Scripts
+slug: pex-file-creation
 ---
 This tutorial walks through creating a self-contained PEX binary from a set of
 python scripts. <!--more-->The main reason I wrote this is that Python 2 is now end-of-life,

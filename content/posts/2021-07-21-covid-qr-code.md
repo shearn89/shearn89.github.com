@@ -10,6 +10,7 @@ tags:
 - exploration
 featuredImage: "/images/qrcode-wide.png"
 title: Covid and QR Codes
+slug: covid-qr-code
 ---
 I've had to travel for work over the last few months. Most recently I took a look at the UK Government's Passenger Locator Form - specifically the QR code it produces.
 <!--more-->

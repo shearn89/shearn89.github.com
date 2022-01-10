@@ -11,6 +11,7 @@ tags:
 - python
 featuredImage: "/images/apache-nifi.png"
 title: Automating NiFi flow testing with Docker and Python
+slug: automated-nifi-testing
 ---
 I've recently had a dig into automating some NiFi flow testing using Docker and Python. It seemed simple at first, but rapidly became quite complicated. I thought I'd write up some notes, which I hope to improve on when I have more time.
 <!--more-->
