@@ -14,8 +14,8 @@ categories: []
 hiddenFromHomePage: false
 hiddenFromSearch: false
 
-featuredImage: ""
-featuredImagePreview: ""
+featuredImage: "go-lambda-arm.png"
+featuredImagePreview: "go-lambda-arm-preview.png"
 
 toc:
   enable: true

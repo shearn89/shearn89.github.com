@@ -1,8 +1,8 @@
 ---
 title: "Docker on Codebuild"
 subtitle: ""
-date: 2022-01-10T12:23:48Z
-lastmod: 2022-01-10T12:23:48Z
+date: 2022-01-10T13:23:48Z
+lastmod: 2022-01-10T13:23:48Z
 draft: false
 author: ""
 authorLink: ""
@@ -14,7 +14,7 @@ categories: []
 hiddenFromHomePage: false
 hiddenFromSearch: false
 
-featuredImage: ""
+featuredImage: "/images/docker-codebuild.png"
 featuredImagePreview: "/images/docker-codebuild-preview.png"
 
 toc:
