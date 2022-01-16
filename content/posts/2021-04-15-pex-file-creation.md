@@ -38,8 +38,13 @@ Then, we can create our simple hello world script. It'll pull in the `requests`
 library, but it doesn't actually use it. It's just to demonstrate pulling deps
 from pypi.
 
+{{< admonition >}}
+I was recently pinged on GitHub by [Caleb9](https://github.com/Caleb9) to say that there's [a change](https://gitanswer.com/exec-format-error-when-invoking-a-script-after-building-pex-with-v2-1-51-python-1015572775) in Pex 2.1.46 that means you now require a shebang in `main.py`. So if you do get odd behaviour, make sure it's there!
+{{< /admonition >}}
+
 ```python
 $ cat <EOF>>main.py
+#!/usr/bin/env python3
 import requests
 
 def hello():
