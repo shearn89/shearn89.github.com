@@ -8,8 +8,12 @@ author: ""
 authorLink: ""
 description: ""
 
-tags: []
-categories: []
+tags:
+- aws
+- codebuild
+- docker
+categories:
+- howto
 
 hiddenFromHomePage: false
 hiddenFromSearch: false

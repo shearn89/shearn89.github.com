@@ -8,8 +8,11 @@ author: ""
 authorLink: ""
 description: ""
 
-tags: []
-categories: []
+tags:
+- aws
+- cloudformation
+categories:
+- howto
 
 hiddenFromHomePage: false
 hiddenFromSearch: false
