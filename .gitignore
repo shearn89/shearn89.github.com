@@ -20,3 +20,9 @@ public/
 *.xcf
 node_modules/
 cloudformation.yaml
+
+tf.plan
+*.backup
+.terraform/
+.idea/
+backup/
