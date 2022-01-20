@@ -1,5 +1,5 @@
 ---
-title: "Installing Depthai on Apple Silicon"
+title: "Installing DepthAI on Apple Silicon"
 subtitle: ""
 date: 2022-01-14T10:25:01Z
 lastmod: 2022-01-14T10:25:01Z
@@ -29,21 +29,24 @@ I finally got around to playing with my Oak D-Lite camera from Luxonis!
 
 Installation:
 
-mac already had brew up and running, **not** under rosetta.
+mac already had brew up and running, **not** under Rosetta.
 
+<!-- spellchecker-disable -->
 ```bash
-$> uname -m
+$ uname -m
 arm64
-$> python --version
+$ python --version
 Python 3.8.12
-$> pyenv local
+$ pyenv local
 3.8.12
 # takes a long time...
-$> brew install cmake opencv
+$ brew install cmake opencv
 ```
+<!-- spellchecker-enable -->
 when it's done:
+<!-- spellchecker-disable -->
 ```bash
-$> python -m pip install virtualenv                                                                             ✔  1211  11:03:56
+$ python -m pip install virtualenv                                                                             ✔  1211  11:03:56
 Collecting virtualenv
   Using cached virtualenv-20.13.0-py2.py3-none-any.whl (6.5 MB)
 Collecting distlib<1,>=0.3.1
@@ -57,20 +60,23 @@ Installing collected packages: platformdirs, filelock, distlib, virtualenv
 Successfully installed distlib-0.3.4 filelock-3.4.2 platformdirs-2.4.1 virtualenv-20.13.0
 WARNING: You are using pip version 21.1.1; however, version 21.3.1 is available.
 You should consider upgrading via the '/Users/ajshearn/.pyenv/versions/3.8.12/bin/python -m pip install --upgrade pip' command.
-$> python -m virtualenv .venv                                                                                   ✔  1212  11:04:15
+$ python -m virtualenv .venv                                                                                   ✔  1212  11:04:15
 created virtual environment CPython3.8.12.final.0-64 in 346ms
   creator CPython3Posix(dest=/Users/ajshearn/repos/playground/depthai/.venv, clear=False, no_vcs_ignore=False, global=False)
   seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/Users/ajshearn/Library/Application Support/virtualenv)
     added seed packages: pip==21.3.1, setuptools==60.2.0, wheel==0.37.1
   activators BashActivator,CShellActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator
-$> . .venv/bin/activate
-$> pip install -v numpy
-$> pip install --no-use-pep517 -v depthai
+$ . .venv/bin/activate
+$ pip install -v numpy
+$ pip install --no-use-pep517 -v depthai
 ```
+<!-- spellchecker-enable -->
 
 Now clone the actual examples:
+<!-- spellchecker-disable -->
 ```bash
-$> gh repo clone luxonis/depthai-python
-$> cd depthai-python/
-$> git checkout gen2_uvc
+gh repo clone luxonis/depthai-python
+cd depthai-python/
+git checkout gen2_uvc
 ```
+<!-- spellchecker-enable -->

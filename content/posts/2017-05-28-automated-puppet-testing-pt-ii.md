@@ -2,7 +2,8 @@
 categories:
 - howto
 date: "2017-05-28T00:00:00Z"
-description: Second part of a series on automated testing with Puppet, using RSpec.
+description: Second part of a series on automated testing with Puppet, using
+  RSpec.
 tags: 
 - puppet 
 - automation 
@@ -16,33 +17,62 @@ How to get started with unit testing Puppet code, part 2 of 3.
 
 ## Introduction
 
-This post follows on from a [previous post](/2017/05/09/automated-puppet-testing-pt1). If you're new to testing your Puppet code, go there to get set up! We'll be using the same [repository](https://github.com/shearn89/puppet-helloworld) and building from there.
+This post follows on from a [previous
+post](/2017/05/09/automated-puppet-testing-pt1). If you're new to testing your
+Puppet code, go there to get set up! We'll be using the same
+[repository](https://github.com/shearn89/puppet-helloworld) and building from
+there.
 
 This part of the tutorial will focus on **Facts** and **Fixtures**. Briefly:
 
-* *Facts* are information provided by the *Agent* during a puppet run. Generally they're information derived from the box itself, things such as IP addresses, fully qualified domain names, OS versions, etc. Sometimes you want to define some custom facts for your specific module, either to make logic easier in templates/code, or to provide information back to an External Node Classifier such as Foreman or RedHat Satellite.
-* *Fixtures* are a testing tool: your module may have dependencies, but when running the RSpec tests not all of these will be available. We tell RSpec how to pull these dependencies so that the tests run correctly.
+- *Facts* are information provided by the *Agent* during a puppet run.
+  Generally they're information derived from the box itself, things such as IP
+  addresses, fully qualified domain names, OS versions, etc. Sometimes you want
+  to define some custom facts for your specific module, either to make logic
+  easier in templates/code, or to provide information back to an External Node
+  Classifier such as Foreman or RedHat Satellite.
+- *Fixtures* are a testing tool: your module may have dependencies, but when
+  running the RSpec tests not all of these will be available. We tell RSpec how
+  to pull these dependencies so that the tests run correctly.
 
 We'll tackle these in reverse order!
 
 ## Fixtures
 
-I'll work with an example from my system hardening module ["toughen"](https://github.com/shearn89/puppet-toughen) and we'll flesh it out in the `helloworld` repo.
+I'll work with an example from my system hardening module
+["toughen"](https://github.com/shearn89/puppet-toughen) and we'll flesh it out
+in the `helloworld` repo.
 
-There's a section of the system hardening module where I want to add a specific line to a config file for Postfix. I don't want to have to manage the entire file, especially when Postfix may not even be installed! Instead, I just want to make sure that (unless overridden) Postfix is listening to local interfaces only by default. This means if the package gets pulled in as a dependency or is installed as part of a default build, there's not an extra port listening on the network that could expose an attack vector.
+There's a section of the system hardening module where I want to add a specific
+line to a config file for Postfix. I don't want to have to manage the entire
+file, especially when Postfix may not even be installed! Instead, I just want
+to make sure that (unless overridden) Postfix is listening to local interfaces
+only by default. This means if the package gets pulled in as a dependency or is
+installed as part of a default build, there's not an extra port listening on
+the network that could expose an attack vector.
 
 Specifically, I want to ensure that this line is present:
+<!-- spellchecker-disable -->
 ```sh
 inet_interfaces = localhost
 ```
-That's it! The Puppetlabs `stdlib` module provides an excellent tool for this. We could probably use augeas to do it (and the excellent providers from the [herculesteam](http://augeasproviders.com/) would be perfect for it), but we'll just use `stdlib`. There's a lot of other good tools in there: go read [the docs](https://forge.puppet.com/puppetlabs/stdlib)!
+<!-- spellchecker-enable -->
+That's it! The PuppetLabs `stdlib` module provides an excellent tool for this.
+We could probably use augeas to do it (and the excellent providers from the
+[herculesteam](http://augeasproviders.com/) would be perfect for it), but we'll
+just use `stdlib`. There's a lot of other good tools in there: go read [the
+docs](https://forge.puppet.com/puppetlabs/stdlib)!
 
-Lucky for us, the `stdlib` module is a dependency by default in the `metadata.json`, so no need to update that. You would if you were adding additional dependencies. So, similar to Part 1, we'll start by writing the tests.
+Lucky for us, the `stdlib` module is a dependency by default in the
+`metadata.json`, so no need to update that. You would if you were adding
+additional dependencies. So, similar to Part 1, we'll start by writing the
+tests.
 
 ### Test Case
 
 Create a file call `spec/classes/postfix_spec.rb`:
 
+<!-- spellchecker-disable -->
 ```ruby
 require 'spec_helper'
 describe 'helloworld::postfix' do
@@ -51,8 +81,11 @@ describe 'helloworld::postfix' do
   end
 end
 ```
-Save and quit, and run `bundle exec rake test`. You might want to alias that: `alias bert='bundle exec rake test'`. As expected, failure:
+<!-- spellchecker-enable -->
+Save and quit, and run `bundle exec rake test`. You might want to alias that:
+`alias bert='bundle exec rake test'`. As expected, failure:
 
+<!-- spellchecker-disable -->
 ```sh
 Finished in 0.16792 seconds (files took 0.67494 seconds to load)
 3 examples, 1 failure
@@ -61,12 +94,14 @@ Failed examples:
 
 rspec ./spec/classes/postfix_spec.rb:4 # helloworld::postfix with default values for all parameters should contain File_line[postfix-local-only]
 ```
-So, now we go write some code to back it up. 
+<!-- spellchecker-enable -->
+So, now we go write some code to back it up.
 
 ### Class Under Test
 
 Create a file `manifests/postfix.pp`:
 
+<!-- spellchecker-disable -->
 ```puppet
 # Class: Helloworld::Postfix
 # 
@@ -78,11 +113,16 @@ class helloworld::postfix {
   }
 }
 ```
+<!-- spellchecker-enable -->
 
-This is pretty bare. Basically all it's saying is that in the file `/etc/postfix/main.cf`, the line specified needs to be present. We can help puppet identify that line by specifying a regex: that's the `match` parameter. It's best to keep those simple if you're using them.
+This is pretty bare. Basically all it's saying is that in the file
+`/etc/postfix/main.cf`, the line specified needs to be present. We can help
+puppet identify that line by specifying a regex: that's the `match` parameter.
+It's best to keep those simple if you're using them.
 
 Now, run the tests again:
 
+<!-- spellchecker-disable -->
 ```sh
 Finished in 0.16711 seconds (files took 0.62496 seconds to load)
 3 examples, 1 failure
@@ -91,6 +131,7 @@ Failed examples:
 
 rspec ./spec/classes/postfix_spec.rb:4 # helloworld::postfix with default values for all parameters should contain File_line[postfix-local-only]
 ```
+<!-- spellchecker-enable -->
 
 Huh, failed again...
 
@@ -98,6 +139,7 @@ Huh, failed again...
 
 Scrolling further up:
 
+<!-- spellchecker-disable -->
 ```sh
 Failures:
 
@@ -107,17 +149,24 @@ Failures:
      Puppet::PreformattedError:
        Evaluation Error: Error while evaluating a Resource Statement, Unknown resource type: 'file_line' at /home/shearna/repos/helloworld/spec/fixtures/modules/helloworld/manifests/postfix.pp:4:3 on node boris-shearna.home
 ```
+<!-- spellchecker-enable -->
 
-Okay, that makes more sense. What it's saying is that the test hasn't passed becase the resource type `file_line` isn't available. That's because we need to tell RSpec there's a dependency! First, create a file in the root of your repository called `.fixtures.yml`. Mine looks like this:
+Okay, that makes more sense. What it's saying is that the test hasn't passed
+because the resource type `file_line` isn't available. That's because we need
+to tell RSpec there's a dependency! First, create a file in the root of your
+repository called `.fixtures.yml`. Mine looks like this:
 
+<!-- spellchecker-disable -->
 ```yaml
 fixtures:
   repositories:
     stdlib: "git://github.com/puppetlabs/puppetlabs-stdlib.git"
 ```
+<!-- spellchecker-enable -->
 
 You can also specify a particular version of the repo if you like:
 
+<!-- spellchecker-disable -->
 ```yaml
 fixtures:
   repositories:
@@ -125,10 +174,13 @@ fixtures:
       repo: "git://github.com/puppetlabs/puppetlabs-stdlib.git"
       ref: "4.17.0"
 ```
-Useful if you're worried about compatibility (even more so now Puppet 3 is officially deprecated/end-of-lifed/etc).
+<!-- spellchecker-enable -->
+Useful if you're worried about compatibility (even more so now Puppet 3 is
+officially deprecated/end-of-life'd/etc).
 
 Okay, with that done, let's try our tests again:
 
+<!-- spellchecker-disable -->
 ```sh
 shearna@boris-shearna:~/repos/helloworld$ bert
 Warning: Dependency puppetlabs-stdlib has an open ended dependency version requirement >= 1.0.0
@@ -156,19 +208,32 @@ Checking connectivity... done.
 Finished in 0.1726 seconds (files took 0.64383 seconds to load)
 3 examples, 0 failures
 ```
+<!-- spellchecker-enable -->
 
-Excellent! We have working fixtures! You can use this to add any other dependencies to your project, so if you're going the whole way and writing tests for your [roles and profiles](http://garylarizza.com/blog/2014/02/17/puppet-workflow-part-2/), then this would be especially useful.
+Excellent! We have working fixtures! You can use this to add any other
+dependencies to your project, so if you're going the whole way and writing
+tests for your [roles and
+profiles](http://garylarizza.com/blog/2014/02/17/puppet-workflow-part-2/), then
+this would be especially useful.
 
 Let's move on to facts...
 
 ## Facts
 
-Now what if we wanted to only add that file line if the file was present? If for some reason the `postfix` package was not installed on the system, this module would fail at runtime, as the file `/etc/postfix/main.cf` wouldn't be present. One way I've approached this in my module is to add some simple facts to indicate whether the package is installed. This lets me guard the resource declaration with a simple `if` statement. 
+Now what if we wanted to only add that file line if the file was present? If
+for some reason the `postfix` package was not installed on the system, this
+module would fail at runtime, as the file `/etc/postfix/main.cf` wouldn't be
+present. One way I've approached this in my module is to add some simple facts
+to indicate whether the package is installed. This lets me guard the resource
+declaration with a simple `if` statement.
 
 ### Writing a Custom Fact
 
-As before, we'll write our tests first. Create a file called `spec/unit/facter/postfix_installed_spec.rb` - you may need to create some folders here! The file:
+As before, we'll write our tests first. Create a file called
+`spec/unit/facter/postfix_installed_spec.rb` - you may need to create some
+folders here! The file:
 
+<!-- spellchecker-disable -->
 ```ruby
 describe 'postfix_installed', :type => :fact do
   before { Facter.clear }
@@ -189,18 +254,27 @@ describe 'postfix_installed', :type => :fact do
 
 end
 ```
+<!-- spellchecker-enable -->
 Okay, lets go through this first:
 
-* We're describing the `postfix_installed` object, and it's a `fact`.
-* We clear the current set of facts on each test run.
-* We specify our default context (in this case, only Linux machines)
-* We specify some facts for testing purposes, in case we're developing on another kernel.
-* Then we actually test our fact. As you'll see in the next bit, we use the `Facter::Util::Resolution` methods to make it easy to mock our fact, which is what we're doing here. We mock a call to `which` with the argument `sendmail`, and we tell the call what to return. Here we're checking that the `sendmail` command (provided by the `postfix` package) is present, which is nice and simple.
-* We then check the fact is set correctly.
-* Lastly, we do a similar test for the other logical branch where the package is not installed.
+- We're describing the `postfix_installed` object, and it's a `fact`.
+- We clear the current set of facts on each test run.
+- We specify our default context (in this case, only Linux machines)
+- We specify some facts for testing purposes, in case we're developing on
+  another kernel.
+- Then we actually test our fact. As you'll see in the next bit, we use the
+  `Facter::Util::Resolution` methods to make it easy to mock our fact, which is
+  what we're doing here. We mock a call to `which` with the argument
+  `sendmail`, and we tell the call what to return. Here we're checking that the
+  `sendmail` command (provided by the `postfix` package) is present, which is
+  nice and simple.
+- We then check the fact is set correctly.
+- Lastly, we do a similar test for the other logical branch where the package
+  is not installed.
 
 We'll run the tests and see what the failure is:
 
+<!-- spellchecker-disable -->
 ```sh
 Failures:
 
@@ -226,9 +300,12 @@ Failed examples:
 rspec ./spec/unit/facter/postfix_installed_spec.rb:7 # postfix_installed on linux should return true if installed
 rspec ./spec/unit/facter/postfix_installed_spec.rb:12 # postfix_installed on linux should return false if not installed
 ```
+<!-- spellchecker-enable -->
 
-Okay, no surprises there, we've not written any code. Add the following to `lib/facter/postfix_installed.rb` (again, you may need to create the folder):
+Okay, no surprises there, we've not written any code. Add the following to
+`lib/facter/postfix_installed.rb` (again, you may need to create the folder):
 
+<!-- spellchecker-disable -->
 ```ruby
 # Returns true if postfix is installed
 Facter.add(:postfix_installed) do
@@ -240,11 +317,18 @@ Facter.add(:postfix_installed) do
   end
 end
 ```
+<!-- spellchecker-enable -->
 
-Nice and simple! We define a fact called `postfix_installed`, and specify that it's only valid on the Linux kernel. Then we use the `Facter::Util::Resolution` class to provide an easily-testable variable called `output`. If `output` has any value at all, the fact is `true`, otherwise `false`. This works because the `which` command returns nothing except an error code if the command isn't found.
+Nice and simple! We define a fact called `postfix_installed`, and specify that
+it's only valid on the Linux kernel. Then we use the `Facter::Util::Resolution`
+class to provide an easily-testable variable called `output`. If `output` has
+any value at all, the fact is `true`, otherwise `false`. This works because the
+`which` command returns nothing except an error code if the command isn't
+found.
 
 If we run the test again, we'll see:
 
+<!-- spellchecker-disable -->
 ```sh
 /usr/bin/ruby2.3 -I/home/shearna/repos/helloworld/vendor/bundle/ruby/2.3.0/gems/rspec-core-3.6.0/lib:/home/shearna/repos/helloworld/vendor/bundle/ruby/2.3.0/gems/rspec-support-3.6.0/lib /home/shearna/repos/helloworld/vendor/bundle/ruby/2.3.0/gems/rspec-core-3.6.0/exe/rspec --pattern spec/\{aliases,classes,defines,unit,functions,hosts,integration,type_aliases,types\}/\*\*/\*_spec.rb --color
 .....
@@ -252,13 +336,15 @@ If we run the test again, we'll see:
 Finished in 0.20792 seconds (files took 0.63526 seconds to load)
 5 examples, 0 failures
 ```
+<!-- spellchecker-enable -->
 
-Et voila! Working custom fact. We can now use this in our class.
+Voila! Working custom fact. We can now use this in our class.
 
 ### Using the Fact and Updating Tests
 
 Modify the `helloworld::postfix` class to look like this:
 
+<!-- spellchecker-disable -->
 ```puppet
 # Class: Helloworld::Postfix
 # 
@@ -272,9 +358,12 @@ class helloworld::postfix {
   }
 }
 ```
+<!-- spellchecker-enable -->
 
-Note the `if` statement wrapping the declaration. If we run the tests now, it may well fail as the value of the fact while under test probably isn't defined:
+Note the `if` statement wrapping the declaration. If we run the tests now, it
+may well fail as the value of the fact while under test probably isn't defined:
 
+<!-- spellchecker-disable -->
 ```sh
 Finished in 0.18349 seconds (files took 0.6455 seconds to load)
 5 examples, 1 failure
@@ -283,9 +372,13 @@ Failed examples:
 
 rspec ./spec/classes/postfix_spec.rb:4 # helloworld::postfix with default values for all parameters should contain File_line[postfix-local-only]
 ```
+<!-- spellchecker-enable -->
 
-In order to test the class, we'll need to add some logic around the tests. We'll update the test class `postfix_spec.rb`, removing the simple test that was there previously and adding 2 to replace it:
+In order to test the class, we'll need to add some logic around the tests.
+We'll update the test class `postfix_spec.rb`, removing the simple test that
+was there previously and adding 2 to replace it:
 
+<!-- spellchecker-disable -->
 ```ruby
 require 'spec_helper'
 describe 'helloworld::postfix' do
@@ -301,9 +394,12 @@ describe 'helloworld::postfix' do
   end
 end
 ```
+<!-- spellchecker-enable -->
 
-We've added some additional tests to confirm that it compiles with no changes, and 2 tests to check each value of the fact. If we run the tests now:
+We've added some additional tests to confirm that it compiles with no changes,
+and 2 tests to check each value of the fact. If we run the tests now:
 
+<!-- spellchecker-disable -->
 ```sh
 /usr/bin/ruby2.3 -I/home/shearna/repos/helloworld/vendor/bundle/ruby/2.3.0/gems/rspec-core-3.6.0/lib:/home/shearna/repos/helloworld/vendor/bundle/ruby/2.3.0/gems/rspec-support-3.6.0/lib /home/shearna/repos/helloworld/vendor/bundle/ruby/2.3.0/gems/rspec-core-3.6.0/exe/rspec --pattern spec/\{aliases,classes,defines,unit,functions,hosts,integration,type_aliases,types\}/\*\*/\*_spec.rb --color
 ......
@@ -311,13 +407,27 @@ We've added some additional tests to confirm that it compiles with no changes, a
 Finished in 0.15009 seconds (files took 0.64442 seconds to load)
 6 examples, 0 failures
 ```
+<!-- spellchecker-enable -->
 
 Cool - all working!
 
 ## Summary
 
-So, we've now got a module that has basic tests wrapping up the logic of the classes, as well as a custom fact that gets tested, and some dependencies that get pulled in. The ideas here can be taken much further. Something to bear in mind is what you're trying to test with these unit tests: you should be testing the logic of your class, making sure that the resources and parameters you've defined and guarded with certain bits of logic are correctly applied. There's no need to test that every single resource is present, as that's just testing that Puppet itself works as intended: something you should be able to assume works fine! Ideally, anywhere you have a variable that affects a resource or even a template, you should have a test for each branch of the logic tree.
+So, we've now got a module that has basic tests wrapping up the logic of the
+classes, as well as a custom fact that gets tested, and some dependencies that
+get pulled in. The ideas here can be taken much further. Something to bear in
+mind is what you're trying to test with these unit tests: you should be testing
+the logic of your class, making sure that the resources and parameters you've
+defined and guarded with certain bits of logic are correctly applied. There's
+no need to test that every single resource is present, as that's just testing
+that Puppet itself works as intended: something you should be able to assume
+works fine! Ideally, anywhere you have a variable that affects a resource or
+even a template, you should have a test for each branch of the logic tree.
 
-If you plan to support multiple operating systems, then you'd want to expand your test contexts to cover the various OS's that you support. In this way you can ensure that changes don't break the module, a bit more easily than spinning up a whole load of vagrant boxes. We'll cover that (system testing on VMs) in Part III!
+If you plan to support multiple operating systems, then you'd want to expand
+your test contexts to cover the various OS's that you support. In this way you
+can ensure that changes don't break the module, a bit more easily than spinning
+up a whole load of vagrant boxes. We'll cover that (system testing on VMs) in
+Part III!
 
 ./A

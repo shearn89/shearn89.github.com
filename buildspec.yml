@@ -3,7 +3,7 @@ phases:
   build:
     commands:
       - 'git status; git log -1'
-      - 'hugo -v'
+      - 'make'
 artifacts:
   files:
     - '**/*'

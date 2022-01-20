@@ -10,10 +10,14 @@ toc: false
 slug: hello-world
 ---
 
-This is the hot-off-the-press revamp of my blog. <!--more-->The old one was a bit out-dated, so I intend to start afresh, blogging about interesting technical stuff that I come across in my professional life. Tech articles, how-tos, problems I've encountered... The usual!
+This is the hot-off-the-press revamp of my blog. <!--more-->The old one was a
+bit out-dated, so I intend to start afresh, blogging about interesting technical
+stuff that I come across in my professional life. Tech articles, how-tos,
+problems I've encountered... The usual!
 
 Hope you like it.
 
-*Image by [oskay](https://www.flickr.com/photos/oskay/472097903) on Flickr, cropped to size by me.*
+*Image by [oskay](https://www.flickr.com/photos/oskay/472097903) on Flickr,
+cropped to size by me.*
 
 ./A

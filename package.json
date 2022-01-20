@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "markdown-link-check": "^3.9.0",
+    "markdownlint": "^0.25.1",
+    "markdownlint-cli2": "^0.4.0",
+    "spellchecker-cli": "^4.8.1"
+  }
+}
