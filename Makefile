@@ -1,9 +1,6 @@
-.PHONY: deps build public lint precheck postcheck spellcheck links
+.PHONY: build public lint precheck postcheck spellcheck links
 
-build: deps precheck public postcheck
-
-deps:
-	npm install
+build: precheck public postcheck
 
 public:
 	hugo
@@ -13,12 +10,12 @@ precheck: spellcheck lint
 postcheck: links
 
 spellcheck:
-	./node_modules/.bin/spellchecker -p spell indefinite-article repeated-words syntax-mentions syntax-urls frontmatter \
+	npx -q spellchecker-cli@latest -p spell indefinite-article repeated-words syntax-mentions syntax-urls frontmatter \
 		--frontmatter-keys title description \
 		-d .dictionary.txt \
 		-f content/**/*.md
 lint:
-	./node_modules/.bin/markdownlint-cli2 content/**/*.md
+	npx -q markdownlint-cli2@latest content/**/*.md
 
 links: public
-	find content/posts/ -name \*.md -print0 | xargs -0 -n1 ./node_modules/.bin/markdown-link-check -c .mdlc-config.json
+	find content/posts/ -name \*.md -print0 | xargs -0 -n1 npx -q markdown-link-check@latest -c .mdlc-config.json
