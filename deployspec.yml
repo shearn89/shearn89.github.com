@@ -1,0 +1,10 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - ls -l
+      - echo 'bucket:'
+      - aws s3 ls s3://$S3_BUCKET/
+      - echo 'syncing:'
+      - aws s3 sync --delete ./ s3://$S3_BUCKET/
