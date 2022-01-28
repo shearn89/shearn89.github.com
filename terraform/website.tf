@@ -10,19 +10,16 @@ terraform {
     dynamodb_table = "terraform-lock-table"
     key    = "shearn89-blog/terraform.tfstate"
     region = "eu-west-1"
-    profile = "personal"
   }
 }
 
 provider "aws" {
   region = "eu-west-1"
-  profile = "personal"
 }
 
 provider "aws" {
   alias = "virginia"
   region = "us-east-1"
-  profile = "personal"
 }
 
 locals {
