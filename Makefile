@@ -18,4 +18,4 @@ lint:
 	npx --yes -q markdownlint-cli2@0.4.0 content/**/*.md
 
 links: public
-	find content/posts/ -name \*.md -print0 | xargs -0 -n1 npx --yes -q markdown-link-check@3.9.0 --config .mdlc-config.json
+	npx --yes -q markdown-link-check@3.9.3 --config .mdlc-config.json content/**/*.md
