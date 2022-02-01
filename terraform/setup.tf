@@ -15,9 +15,23 @@ terraform {
 
 provider "aws" {
   region = "eu-west-1"
+  default_tags {
+    tags = {
+      Cloudformation = "False"
+      Terraform = "True"
+      Stack = "shearn89.github.com"
+    }
+  }
 }
 
 provider "aws" {
   alias = "virginia"
   region = "us-east-1"
+  default_tags {
+    tags = {
+      Cloudformation = "False"
+      Terraform = "True"
+      Stack = "shearn89.github.com"
+    }
+  }
 }
