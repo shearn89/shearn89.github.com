@@ -13,7 +13,8 @@ tags:
   - kms
   - iam
   - security
-categories: []
+categories: 
+  - Technical
 
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -107,3 +108,5 @@ just makes the usage of the key a bit more specific and auditable.
 There's a lot more info about this approach on
 [the AWS docs](https://docs.aws.amazon.com/kms/latest/developerguide/alias-authorization.html).
 I was just quite surprised that Aliases don't dereference in the way I expected!
+
+./A
