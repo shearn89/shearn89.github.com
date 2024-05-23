@@ -8,7 +8,7 @@ I migrated over from Jekyll - you can read about the process on the [blog itself
 
 ## Building
 
-1. Install golang
+1. Install golang
 2. Install hugo
 3. Run `hugo`
 4. View output in `public/` folder
