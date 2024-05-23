@@ -3,7 +3,7 @@
 build: precheck public postcheck
 
 public:
-	hugo
+	hugo --config hugo.toml
 
 precheck: spellcheck lint 
 
