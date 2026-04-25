@@ -1,0 +1,40 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^(public/|themes/|resources/)
+      - id: end-of-file-fixer
+        exclude: ^(public/|themes/|resources/)
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ["--maxkb=1024"]
+      - id: mixed-line-ending
+      - id: check-merge-conflict
+
+  - repo: https://github.com/rbubley/mirrors-prettier
+    rev: v3.3.3
+    hooks:
+      - id: prettier
+        types_or: [markdown, yaml, json]
+        exclude: ^(public/|themes/|resources/|\.beads/)
+
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.14.0
+    hooks:
+      - id: markdownlint-cli2
+        files: ^content/.*\.md$
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks
+
+  - repo: local
+    hooks:
+      - id: spellchecker-cli
+        name: spellchecker-cli (en-GB)
+        entry: npx --yes -q spellchecker-cli@4.8.1 -l en-GB -p spell indefinite-article repeated-words syntax-mentions syntax-urls frontmatter --frontmatter-keys title description -d .dictionary.txt -f
+        language: system
+        files: ^content/.*\.md$
+        pass_filenames: true

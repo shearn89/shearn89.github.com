@@ -1,16 +1,18 @@
 .PHONY: build public lint precheck postcheck spellcheck links
 
+HUGO := mise exec -- hugo
+
 build: precheck public postcheck
 
 public:
-	hugo --config hugo.toml
+	$(HUGO) --config hugo.toml
 
-precheck: spellcheck lint 
+precheck: spellcheck lint
 
 postcheck: links
 
 spellcheck:
-	npx --yes -q spellchecker-cli@4.8.1 -p spell indefinite-article repeated-words syntax-mentions syntax-urls frontmatter \
+	npx --yes -q spellchecker-cli@4.8.1 -l en-GB -p spell indefinite-article repeated-words syntax-mentions syntax-urls frontmatter \
 		--frontmatter-keys title description \
 		-d .dictionary.txt \
 		-f content/**/*.md

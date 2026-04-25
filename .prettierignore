@@ -1,0 +1,6 @@
+public/
+themes/
+resources/
+.hugo_build.lock
+.beads/
+.dictionary.txt
