@@ -162,3 +162,7 @@ underweighted
 WALLIE
 worktrees
 Yegge's
+catalog
+Artifact
+artifacts
+artifact
