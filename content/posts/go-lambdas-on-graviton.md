@@ -24,8 +24,10 @@ math:
 lightgallery: false
 license: ""
 ---
+
 I recently had a quick look at how to get Golang Lambdas running on ARM -
 specifically AWS' Graviton2 processors.
+
 <!--more-->
 
 It was quite a trivial process really, and I think there are some
@@ -34,9 +36,10 @@ price/performance benefits to using ARM.
 I referred to the following links:
 
 <!-- spellchecker-disable -->
-* <https://www.paulmowat.co.uk/blog/move-aws-lambdas-graviton2-easy-cf-sam>
-* <https://docs.aws.amazon.com/lambda/latest/dg/golang-package.html#golang-package-al2>
-* <https://github.com/aws-samples/sessions-with-aws-sam/tree/master/go-al2>
+
+- <https://www.paulmowat.co.uk/blog/move-aws-lambdas-graviton2-easy-cf-sam>
+- <https://docs.aws.amazon.com/lambda/latest/dg/golang-package.html#golang-package-al2>
+- <https://github.com/aws-samples/sessions-with-aws-sam/tree/master/go-al2>
 <!-- spellchecker-enable -->
 
 I started with a simple [SAM](https://aws.amazon.com/serverless/sam/) hello

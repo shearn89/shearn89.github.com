@@ -22,9 +22,9 @@ resource aws_codebuild_project "blogBuild" {
     }
   }
 
-  artifacts {
+  artefacts {
     type = "S3"
-    location = "shearn89-artifacts"
+    location = "shearn89-artefacts"
     name = "shearn89-blog-branch"
     packaging = "ZIP"
   }
@@ -54,7 +54,7 @@ resource aws_codebuild_project "blogDeploy" {
     buildspec = file("../deployspec.yml")
   }
 
-  artifacts {
+  artefacts {
     type = "CODEPIPELINE"
   }
 
@@ -76,7 +76,7 @@ resource aws_codebuild_project "blogDeploy" {
 resource "aws_codepipeline" "pipeline" {
   name     = "shearn89-blog"
   role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/service-role/AWSCodePipelineServiceRole-eu-west-1-shearn89-blog"
-  artifact_store {
+  artefact_store {
     location = "codepipeline-eu-west-1-356498201105"
     type     = "S3"
   }
@@ -88,13 +88,13 @@ resource "aws_codepipeline" "pipeline" {
       owner    = "AWS"
       provider = "CodeStarSourceConnection"
       version  = "1"
-      output_artifacts = ["SourceArtifact"]
+      output_artefacts = ["SourceArtefact"]
       namespace = "SourceVariables"
       configuration = {
         ConnectionArn = aws_codestarconnections_connection.github.arn
         FullRepositoryId = "shearn89/shearn89.github.com"
         BranchName = "main"
-        OutputArtifactFormat = "CODEBUILD_CLONE_REF"
+        OutputArtefactFormat = "CODEBUILD_CLONE_REF"
       }
     }
   }
@@ -105,8 +105,8 @@ resource "aws_codepipeline" "pipeline" {
       name = "Build"
       owner = "AWS"
       provider = "CodeBuild"
-      input_artifacts = ["SourceArtifact"]
-      output_artifacts = ["BuildArtifact"]
+      input_artefacts = ["SourceArtefact"]
+      output_artefacts = ["BuildArtefact"]
       version = "1"
       namespace = "BuildVariables"
       configuration = {
@@ -121,7 +121,7 @@ resource "aws_codepipeline" "pipeline" {
       name = "DeployS3"
       owner = "AWS"
       provider = "CodeBuild"
-      input_artifacts = ["BuildArtifact"]
+      input_artefacts = ["BuildArtefact"]
       version = "1"
       configuration = {
         ProjectName = "BlogDeployS3"

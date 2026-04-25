@@ -13,11 +13,14 @@ featuredImage: "/images/apache-nifi.png"
 title: Automating NiFi flow testing with Docker and Python
 slug: automated-nifi-testing
 ---
+
 I've recently had a dig into automating some NiFi flow testing using Docker and
 Python. It seemed simple at first, but rapidly became quite complicated. I
 thought I'd write up some notes, which I hope to improve on when I have more
 time.
+
 <!--more-->
+
 ## First cut
 
 Initially, it was a simple flow in an unsecured cluster. The hardest part here
@@ -29,6 +32,7 @@ downloaded from a NiFi instance. The magic incantation was this:
 2. Transform the data to wrap it up ready for reload:
 
 <!-- spellchecker-disable -->
+
 ```python
   def munge_template(self, data):
     resp = self._get(f"{self.base_url}/process-groups/root")
@@ -40,21 +44,25 @@ downloaded from a NiFi instance. The magic incantation was this:
     }
     return output
 ```
+
 <!-- spellchecker-enable -->
 
-<!-- markdownlint-disable-next-line ol-prefix -->
+<!-- markdownlint-disable MD029 -->
+
 3. Then, call PUT on `/process-groups/root/flow-contents` with the output from
    the above as the data, and it should replace the root process group with the
    one from your JSON.
 
+<!-- markdownlint-enable MD029 -->
+
 There are still some gotchas with this, which may or may not mean you have to
 refactor your original flow:
 
-* You need to make sure that parameter contexts etc. are stored in the process
+- You need to make sure that parameter contexts etc. are stored in the process
   group on the source flow.
-* You can't load sensitive values or parameters this way.
-* It will load controller services, but not enable them.
-* Remote process groups talking to this cluster will be broken as UUIDs may
+- You can't load sensitive values or parameters this way.
+- It will load controller services, but not enable them.
+- Remote process groups talking to this cluster will be broken as UUIDs may
   change.
 
 ## Improvements
@@ -114,10 +122,10 @@ cluster after a failure.
 
 ## Remaining Issues
 
-* There's still some oddities since I integrated it with a Kafka node via
+- There's still some oddities since I integrated it with a Kafka node via
   Docker Compose. Something to do with timing and re-balancing that I've not
   yet pinned down.
-* Sensitive values aren't yet sorted, but I could probably load them from a
+- Sensitive values aren't yet sorted, but I could probably load them from a
   config file?
 
 ./A

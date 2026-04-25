@@ -2,9 +2,9 @@ version: 0.2
 phases:
   build:
     commands:
-      - 'git status; git log -1'
-      - '. $NVM_DIR/nvm.sh && make'
-artifacts:
+      - "git status; git log -1"
+      - ". $NVM_DIR/nvm.sh && make"
+artefacts:
   files:
-    - '**/*'
-  base-directory: 'public'
+    - "**/*"
+  base-directory: "public"

@@ -12,14 +12,17 @@ featuredImage: "/images/qrcode-wide.png"
 title: Covid and QR Codes
 slug: covid-qr-code
 ---
+
 I've had to travel for work over the last few months. Most recently I took a
 look at the UK Government's Passenger Locator Form - specifically the QR code
 it produces.
+
 <!--more-->
+
 This is quite prominent on the form, and has "UK Government Use Only" all
 around it, which immediately made me curious!
 
-*Note* - I don't intend for people to use any information here for anything
+_Note_ - I don't intend for people to use any information here for anything
 malicious, I encourage everyone to follow the rules that apply around travel!
 Stay safe everyone!
 
@@ -40,10 +43,12 @@ This looked a lot like base64 to me, so I copied the text and ran it through a
 decoder:
 
 <!-- spellchecker-disable -->
+
 ```sh
 $ cat qrcode.txt | base64 --decode
 {"ts":"2021-07-17T08:02:00Z","id": ... }
 ```
+
 <!-- spellchecker-enable -->
 
 ## The Data
@@ -51,12 +56,17 @@ $ cat qrcode.txt | base64 --decode
 So, I ran it through JQ so my eyes didn't hurt:
 
 <!-- spellchecker-disable -->
+
 ```sh
 cat qrcode.txt | base64 --decode | jq
 ```
+
 <!-- spellchecker-enable -->
+
 producing
+
 <!-- spellchecker-disable -->
+
 ```json
 {
   "ts": "2021-07-17T08:02:00Z",
@@ -84,32 +94,33 @@ producing
   "ctr": "XXXXXXXXXxxx"
 }
 ```
+
 <!-- spellchecker-enable -->
 
 This was kinda cool. It looks like we have a full copy of the passenger locator
 data here:
 
-* `ts` - timestamp of submission of form
-* `id` - uuid for the record in the database
-* `rf` - this is the (slightly) more human-readable reference number for the
+- `ts` - timestamp of submission of form
+- `id` - uuid for the record in the database
+- `rf` - this is the (slightly) more human-readable reference number for the
   form
-* `ln` - last name
-* `fn` - first names. This actually had all my names, I've removed some here.
-* `di` - this was my passport number, so maybe 'document id'?
-* `tg` - this is a list of any contact numbers you've put on the form, with
+- `ln` - last name
+- `fn` - first names. This actually had all my names, I've removed some here.
+- `di` - this was my passport number, so maybe 'document id'?
+- `tg` - this is a list of any contact numbers you've put on the form, with
   country codes
-* `ac` - not sure on this one. There's a number of boolean fields in the form -
+- `ac` - not sure on this one. There's a number of boolean fields in the form -
   could be "accommodation" indicating that home address is provided? Or could
   be "amber country" and some indication that quarantine is required...
-* `qa` - this is the (at least) first line of my address
-* `ad` - arrival date in the UK
-* `qe` - I think this stands for "quarantine exempt", so if you're e.g. a
+- `qa` - this is the (at least) first line of my address
+- `ad` - arrival date in the UK
+- `qe` - I think this stands for "quarantine exempt", so if you're e.g. a
   haulier you don't have to quarantine on arrival.
-* `rl` - Not sure on this one. I wondered if it was something to do with
+- `rl` - Not sure on this one. I wondered if it was something to do with
   relatives, as you have to declare if this form includes any relatives or just
   yourself? Or it could be to do with test-to-release?
-* `sn` - This is interesting, more on this below
-* `ctr` - This is the 'Covid Test Reference' given by the testing provider
+- `sn` - This is interesting, more on this below
+- `ctr` - This is the 'Covid Test Reference' given by the testing provider
 
 So some interesting fields here! Also why you should probably avoid posting any
 images of the form on social media as it gives someone a lot of info about you!
@@ -121,6 +132,7 @@ the data. Dumping it as hex reveals something that looks like it's got a couple
 of layers:
 
 <!-- spellchecker-disable -->
+
 ```sh
 $ cat sn_field | xxd
 00000000: 3044 0220 0e1f df3d 28xx xxxx xxxx xxxx  0D. ............
@@ -132,6 +144,7 @@ $ cat sn_field_hex
   02 20
     38 d8 14 ec a4     some more interesting data that i'll redact just in case            67 99 fb
 ```
+
 <!-- spellchecker-enable -->
 
 I sort of lost interest here as I'm assuming that the key is not stored with
@@ -142,23 +155,27 @@ decoded by their systems, and the system removes this `sn` field and then uses
 it to integrity check the rest of the data. For example:
 
 <!-- spellchecker-disable -->
+
 ```sh
 $ cat <<EOF> testfile.json
 { "foo": "bar" }
 $ cat testfile.json | sha1sum
 15abb9bce7cf6dc65ab2f6bc6aebfd406448434b  -
 ```
+
 <!-- spellchecker-enable -->
 
 So our actual data structure could be:
 
 <!-- spellchecker-disable -->
+
 ```sh
 {
   "foo": "bar",
   "sn": "15abb9bce7cf6dc65ab2f6bc6aebfd406448434b"
 }
 ```
+
 <!-- spellchecker-enable -->
 
 ...in this simple example.

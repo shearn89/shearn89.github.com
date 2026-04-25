@@ -13,7 +13,7 @@ tags:
   - kms
   - iam
   - security
-categories: 
+categories:
   - Technical
 
 hiddenFromHomePage: false
@@ -33,6 +33,7 @@ license: ""
 I recently implemented some stuff that set up KMS keys for each application
 being deployed to a k8s cluster, for use with [SOPS](https://github.com/getsops/sops).
 Turns out, aliases are not as trivial to use in policies as you might expect!
+
 <!--more-->
 
 My initial attempt at setting this up was to do the following in Terraform:

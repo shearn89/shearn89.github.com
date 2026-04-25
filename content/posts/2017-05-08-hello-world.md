@@ -17,7 +17,7 @@ problems I've encountered... The usual!
 
 Hope you like it.
 
-*Image by [oskay](https://www.flickr.com/photos/oskay/472097903) on Flickr,
-cropped to size by me.*
+_Image by [oskay](https://www.flickr.com/photos/oskay/472097903) on Flickr,
+cropped to size by me._
 
 ./A

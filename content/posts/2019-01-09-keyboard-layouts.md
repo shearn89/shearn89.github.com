@@ -11,6 +11,7 @@ title: Learning a new keyboard layout
 toc: false
 slug: keyboard-layouts
 ---
+
 Recently I started learning a new keyboard layout: I'm a fast enough typist on
 QWERTY (at least for my needs: somewhere around 80 WPM average, 110 max), but I
 have some terrible habits! <!--more--> I found when I started thinking about it

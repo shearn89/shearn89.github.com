@@ -96,13 +96,13 @@ resource "aws_cloudfront_cache_policy" "policy" {
     enable_accept_encoding_brotli = true
     enable_accept_encoding_gzip = true
     cookies_config {
-      cookie_behavior = "none"
+      cookie_behaviour = "none"
     }
     headers_config {
-      header_behavior = "none"
+      header_behaviour = "none"
     }
     query_strings_config {
-      query_string_behavior = "none"
+      query_string_behaviour = "none"
     }
   }
 }
@@ -127,7 +127,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     bucket = "${local.log_bucket}.s3.amazonaws.com"
     prefix = "logs/cloudfront/${local.bucket_name}/"
   }
-  default_cache_behavior {
+  default_cache_behaviour {
     allowed_methods        = ["GET", "HEAD"]
     cached_methods         = ["GET", "HEAD"]
     compress = true

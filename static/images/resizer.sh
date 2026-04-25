@@ -16,5 +16,5 @@ else
 fi
 
 MAGIC=green
-# convert -density 1536 -resize 200x100 apache-nifi.svg -compose Copy -gravity center -background red -extent 800x400 -compose Copy -transparent red apache-nifi.png
-convert $INPUT -compose Copy -gravity center -background $MAGIC -extent 800x400 -compose Copy -transparent $MAGIC $OUTPUT
+# convert -density 1536 -resize 200x100 apache-nifi.svg -compose Copy -gravity centre -background red -extent 800x400 -compose Copy -transparent red apache-nifi.png
+convert $INPUT -compose Copy -gravity centre -background $MAGIC -extent 800x400 -compose Copy -transparent $MAGIC $OUTPUT

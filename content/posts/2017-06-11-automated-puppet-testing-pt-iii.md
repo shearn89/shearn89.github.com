@@ -4,17 +4,19 @@ categories:
 date: "2017-06-11T00:00:00Z"
 description: Final part of a series on automated testing with Puppet, using Vagrant,
   r10k, and other tools.
-tags: 
-- puppet 
-- automation 
-- testing 
-- packer 
+tags:
+- puppet
+- automation
+- testing
+- packer
 - vagrant
 featuredImage: "/images/puppets-2.jpg"
 title: Automated Puppet Testing (Pt. III)
 slug: automated-puppet-testing-pt-iii
 ---
+
 How to get started with unit testing Puppet code, part 3 of 3.
+
 <!--more-->
 
 ## Introduction
@@ -77,17 +79,20 @@ You'll want to create 2 things to start with: a folder to serve
 Kickstart/Preseed files from, and a JSON file with the configuration:
 
 <!-- spellchecker-disable -->
+
 ```sh
 cd puppet-helloworld
 mkdir -p ci/packer/http
 cd ci/packer
 touch centos-7.json
 ```
+
 <!-- spellchecker-enable -->
 
 Nice and simple so far. Also make sure Packer is correctly installed:
 
 <!-- spellchecker-disable -->
+
 ```sh
 $ packer --help
 $ Usage: packer [--version] [--help] <command> [<args>]
@@ -95,6 +100,7 @@ $ Usage: packer [--version] [--help] <command> [<args>]
 Available commands are:
     ...
 ```
+
 <!-- spellchecker-enable -->
 
 ### Building
@@ -109,7 +115,8 @@ set of parameters to this, but that wouldn't actually work. In order to build
 something that will actually... er, build... we have to put in at a minimum:
 
 <!-- spellchecker-disable -->
-````json
+
+```json
 {
   "builders": [{
     "name": "centos73",
@@ -134,59 +141,62 @@ something that will actually... er, build... we have to put in at a minimum:
     ]
   }]
 }
-````
+```
+
 <!-- spellchecker-enable -->
 
 So, what have we got here?
 
-* We start with a top level JSON hash.
-* We define a list of `builders`.
-* We give a name to our builder.
-* We specify the type of builder as listed in the documentation.
-* We tell VirtualBox what type of OS it is so it can do it's performance
+- We start with a top level JSON hash.
+- We define a list of `builders`.
+- We give a name to our builder.
+- We specify the type of builder as listed in the documentation.
+- We tell VirtualBox what type of OS it is so it can do it's performance
   tweaking.
-* We specify that we don't want the GUI to run be connected during
+- We specify that we don't want the GUI to run be connected during
   provisioning. When getting started, setting this to `false` can be very
   useful!
-* Then we specify a URL to retrieve the ISO from. This could be a `file://`
+- Then we specify a URL to retrieve the ISO from. This could be a `file://`
   URI.
-* We then have the checksum and checksum type - these are required! Without
+- We then have the checksum and checksum type - these are required! Without
   these Packer has no way to verify that it downloaded the ISO correctly.
-* We tell Packer what SSH username and password it will use to do any further
+- We tell Packer what SSH username and password it will use to do any further
   provisioning with. If you're building Vagrant images, these **must** be
   `vagrant` and your kickstart/preseed must create the user!
-* We let Packer know how to shutdown the machine once built, so it can compress
+- We let Packer know how to shutdown the machine once built, so it can compress
   and package it.
-* Then we specify the `boot_command`, or the sequence of keys that should be
+- Then we specify the `boot_command`, or the sequence of keys that should be
   used to make the VM load our Kickstart/Preseed file. It's literally a
   sequence of keystrokes that you would enter on the boot prompt. There are
   some special keys in angled brackets (e.g. `<up>`), and some variables.
-* We tell VirtualBox what disk size it should be (thin) provisioned with.
+- We tell VirtualBox what disk size it should be (thin) provisioned with.
   Hashicorp recommend setting this larger than needed, as it's thin provisioned
   and chances are you might be destroying and recreating this machine often
   enough that you won't fill the disk.
-* We then tell VirtualBox how to load the Guest Additions ISO - this ISO gives
+- We then tell VirtualBox how to load the Guest Additions ISO - this ISO gives
   us some nice features on the VM, although the one we need most is Shared
   Folders. More info on the
   [VirtualBox](https://www.virtualbox.org/manual/ch04.html) website.
-* We then specify where Packer should start it's embedded web server in order
+- We then specify where Packer should start it's embedded web server in order
   to serve the Kickstart/Preseed files from (and anything else we want to load
   via HTTP).
-* We tell it where to put the built image.
-* Lastly, we tell VirtualBox what to set initial RAM and CPU to.
+- We tell it where to put the built image.
+- Lastly, we tell VirtualBox what to set initial RAM and CPU to.
 
 Phew! Okay, so we've written our initial config. Lets have a stab at running it
 and see what happens. Before we do, change that `headless` setting to `false`,
 so we can see what's up:
 
 <!-- spellchecker-disable -->
+
 ```sh
-$ sed -i '/headless/ s/true/false/' centos-7.json 
-$ packer validate centos-7.json 
+$ sed -i '/headless/ s/true/false/' centos-7.json
+$ packer validate centos-7.json
 Template validated successfully.
 $ packer build centos-7.json
 ...
 ```
+
 <!-- spellchecker-enable -->
 
 You'll see a reasonable amount of output now. To start with, it will download
@@ -198,12 +208,14 @@ On the first run with the config listed above, it took 7 minutes and timed out,
 saying:
 
 <!-- spellchecker-disable -->
+
 ```sh
 ==> Some builds didn't complete successfully and had errors:
 --> centos73: Timeout waiting for SSH.
 
 ==> Builds finished but no artifacts were created.
 ```
+
 <!-- spellchecker-enable -->
 
 ### Kickstart/Preseed
@@ -229,8 +241,9 @@ means packages should be more up to date than relying on the ISO media.
 Okay, with that file created under `ci/packer/http`, lets see what happens now:
 
 <!-- spellchecker-disable -->
+
 ```sh
-$ packer build centos-7.json 
+$ packer build centos-7.json
 centos73 output will be in this color.
 
 ==> centos73: Downloading or copying Guest additions
@@ -262,6 +275,7 @@ Build 'centos73' finished.
 ==> Builds finished. The artifacts of successful builds are:
 --> centos73: VM files in directory: builds
 ```
+
 <!-- spellchecker-enable -->
 
 Awesome! You can see that it's managed to connect to SSH, where in our example
@@ -283,16 +297,19 @@ that Packer provides to customise our box. We're simply going to use the
 that Vagrant works properly, the second installs Puppet.
 
 <!-- spellchecker-disable -->
+
 ```sh
 cd ci/packer/
 mkdir scripts
 cd scripts
 ```
+
 <!-- spellchecker-enable -->
 
 We'll create 2 scripts. The first (`scripts/00-setup-basebox.sh`):
 
 <!-- spellchecker-disable -->
+
 ```bash
 #!/bin/bash
 
@@ -310,6 +327,7 @@ sudo mount /dev/sr1 /media/cdrom
 sudo sh /media/cdrom/VBoxLinuxAdditions.run
 sudo umount /media/cdrom
 ```
+
 <!-- spellchecker-enable -->
 
 This grabs the insecure vagrant key from the vagrant repo, and installs it,
@@ -320,12 +338,14 @@ Guest Additions which allows Vagrant to use shared folders. Pretty simple!
 The second (`scripts/01-install-puppet.sh`) could be inline it's so short:
 
 <!-- spellchecker-disable -->
+
 ```bash
 #!/bin/bash -e
 
 sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
 sudo yum install -y puppet
 ```
+
 <!-- spellchecker-enable -->
 
 So, nice and simple. Lets add those scripts into our JSON file. After the
@@ -333,6 +353,7 @@ So, nice and simple. Lets add those scripts into our JSON file. After the
 closing brace. With a bit of context:
 
 <!-- spellchecker-disable -->
+
 ```json
 {
   "builders": [{
@@ -349,6 +370,7 @@ closing brace. With a bit of context:
   ]
 }
 ```
+
 <!-- spellchecker-enable -->
 
 What this does is start the `provisioners` block and tell Packer that there is
@@ -358,6 +380,7 @@ to the box or anything, Packer handles all that! If we validate the config
 and run the build, we should now see slightly different output:
 
 <!-- spellchecker-disable -->
+
 ```sh
 ==> centos73: Downloading or copying Guest additions
     centos73: Downloading or copying: file:///usr/share/virtualbox/VBoxGuestAdditions.iso
@@ -367,21 +390,25 @@ Build 'centos73' errored: Output directory exists: builds
 
 Use the force flag to delete it prior to building.
 ```
+
 <!-- spellchecker-enable -->
 
 Woops - I need to delete the `builds` directory or use the `-force` flag. Lets
 try again:
 
 <!-- spellchecker-disable -->
+
 ```sh
 packer build -force centos-7.json
 ```
+
 <!-- spellchecker-enable -->
 
 This time, you'll see a LOT of output, as Packer builds the box and then runs
 the scripts we've configured. It should at the end say something like:
 
 <!-- spellchecker-disable -->
+
 ```sh
 ==> centos73: Gracefully halting virtual machine...
     centos73: Removing guest additions drive...
@@ -395,6 +422,7 @@ Build 'centos73' finished.
 ==> Builds finished. The artifacts of successful builds are:
 --> centos73: VM files in directory: builds
 ```
+
 <!-- spellchecker-enable -->
 
 Excellent! We're nearly done with Packer - onto post-processors and packaging
@@ -406,6 +434,7 @@ Similarly to when we added the provisioner, we'll add another section to the
 JSON. With context, as before:
 
 <!-- spellchecker-disable -->
+
 ```json
 {
   "builders": [{
@@ -422,6 +451,7 @@ JSON. With context, as before:
   ]
 }
 ```
+
 <!-- spellchecker-enable -->
 
 There's a double array here, and that's so that you can add additional
@@ -433,6 +463,7 @@ name of the box that it'll create.
 Let's run the build again:
 
 <!-- spellchecker-disable -->
+
 ```sh
 $ packer build -force centos-7.json
     ... much output ...
@@ -450,6 +481,7 @@ Build 'centos73' finished.
 ==> Builds finished. The artifacts of successful builds are:
 --> centos73: 'virtualbox' provider box: helloworld_centos73_virtualbox.box
 ```
+
 <!-- spellchecker-enable -->
 
 Perfect - our post-processor has run, and we've created a Vagrant Box! We'll
@@ -464,6 +496,7 @@ With that done, create a new folder under our `ci` one and create the initial
 Vagrantfile:
 
 <!-- spellchecker-disable -->
+
 ```sh
 $ cd ci/
 $ mkdir vagrant
@@ -474,6 +507,7 @@ ready to `vagrant up` your first virtual environment! Please read
 the comments in the Vagrantfile as well as documentation on
 `vagrantup.com` for more information on using Vagrant.
 ```
+
 <!-- spellchecker-enable -->
 
 ### The Vagrantfile
@@ -482,34 +516,37 @@ Open up the Vagrantfile and you'll see it's actually very well commented.
 Without the comments, it's just:
 
 <!-- spellchecker-disable -->
+
 ```ruby
 Vagrant.configure("2") do |config|
   config.vm.box = "base"
 end
 ```
+
 <!-- spellchecker-enable -->
 
 Pretty simple right? All this says is to start with the `base` box, and build a
 VM from it. That's not really what we want to do, so we'll go through each
 paragraph and see what's relevant.
 
-* `config.vm.box` - We'll set this to be our local box. In this case, it's
+- `config.vm.box` - We'll set this to be our local box. In this case, it's
   `helloworld_centos73_virtualbox`.
-* `config.vm.box_check_update` - as we're using a local box, we'll disable
+- `config.vm.box_check_update` - as we're using a local box, we'll disable
   this.
-* The next 4 paragraphs cover port forwarding and networking. We'll ignore
+- The next 4 paragraphs cover port forwarding and networking. We'll ignore
   these for now.
-* `config.vm.synced_folder` - We could use this to share a folder, but as we're
+- `config.vm.synced_folder` - We could use this to share a folder, but as we're
   sharing a sub-directory of our Vagrant folder, we don't need to. Useful to
   know about though!
-* `config.vm.provider` - This block (as mentioned in the comments) allows us to
+- `config.vm.provider` - This block (as mentioned in the comments) allows us to
   set provider-specific options. Bump the memory up to `4096`.
-* We can safely ignore the other paragraphs for now.
+- We can safely ignore the other paragraphs for now.
 
 If you were to delete the paragraphs we're not using and then tidy up the other
 comments, you'd have a file that now looks like this:
 
 <!-- spellchecker-disable -->
+
 ```ruby
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
@@ -524,11 +561,13 @@ Vagrant.configure("2") do |config|
   end
 end
 ```
+
 <!-- spellchecker-enable -->
 
 If we were to run `vagrant up` now, you'd see the following:
 
 <!-- spellchecker-disable -->
+
 ```sh
 $ vagrant up
 Bringing machine 'default' up with 'virtualbox' provider...
@@ -544,23 +583,27 @@ again.
 
 Couldn't open file /home/shearna/repos/helloworld/ci/vagrant/helloworld_centos73_virtualbox
 ```
+
 <!-- spellchecker-enable -->
 
 That's because we haven't added our `box` file. To do so:
 
 <!-- spellchecker-disable -->
+
 ```sh
 $ vagrant box add ../packer/helloworld_centos73_virtualbox.box  --name helloworld_centos73_virtualbox
 ==> box: Box file was not detected as metadata. Adding it directly...
-==> box: Adding box 'helloworld_centos73_virtualbox' (v0) for provider: 
+==> box: Adding box 'helloworld_centos73_virtualbox' (v0) for provider:
     box: Unpacking necessary files from: file:///home/shearna/repos/helloworld/ci/packer/helloworld_centos73_virtualbox.box
 ==> box: Successfully added box 'helloworld_centos73_virtualbox' (v0) for 'virtualbox'!
 ```
+
 <!-- spellchecker-enable -->
 
 Now:
 
 <!-- spellchecker-disable -->
+
 ```sh
 $ vagrant up
 Bringing machine 'default' up with 'virtualbox' provider...
@@ -580,10 +623,10 @@ Bringing machine 'default' up with 'virtualbox' provider...
     default: SSH auth method: private key
     default: Warning: Connection reset. Retrying...
     default: Warning: Remote connection disconnect. Retrying...
-    default: 
+    default:
     default: Vagrant insecure key detected. Vagrant will automatically replace
     default: this with a newly generated keypair for better security.
-    default: 
+    default:
     default: Inserting generated public key within guest...
     default: Removing insecure key from the guest if it's present...
     default: Key inserted! Disconnecting and reconnecting using new SSH key...
@@ -593,6 +636,7 @@ Bringing machine 'default' up with 'virtualbox' provider...
 ==> default: Mounting shared folders...
     default: /vagrant => /home/shearna/repos/helloworld/ci/vagrant
 ```
+
 <!-- spellchecker-enable -->
 
 Bingo! However the box isn't doing a lot. To make best use of it, we need to
@@ -606,6 +650,7 @@ these run commands/scripts and put files in place. We'll add to our
 Vagrantfile:
 
 <!-- spellchecker-disable -->
+
 ```ruby
 config.vm.provision "shell", inline: "yum update -y"
 config.vm.provision "shell", path: "scripts/01-setup-r10k.sh", name: "configure r10k"
@@ -613,6 +658,7 @@ config.vm.provision "file", source: "Puppetfile", destination: "Puppetfile"
 config.vm.provision "shell", path: "scripts/03-deploy-modules.sh", name: "deploy modules", privileged: false
 config.vm.provision "file", source: "site.pp", destination: "site.pp"
 ```
+
 <!-- spellchecker-enable -->
 
 What are these doing?
@@ -629,6 +675,7 @@ Those scripts? They're pretty simple. The first one to setup r10k
 (`scripts/01-setup-r10k.sh`):
 
 <!-- spellchecker-disable -->
+
 ```bash
 #!/bin/bash
 
@@ -644,6 +691,7 @@ yum install -y ruby rubygems git
 echo 'gem: --no-document' > /etc/gemrc
 gem install r10k
 ```
+
 <!-- spellchecker-enable -->
 
 All this does is correctly set the hostname (needed by Puppet), then install
@@ -652,6 +700,7 @@ dependencies and r10k. Simple!
 The second (`scripts/03-deploy-modules.sh`):
 
 <!-- spellchecker-disable -->
+
 ```bash
 #!/bin/bash
 
@@ -663,10 +712,11 @@ r10k puppetfile check
 echo 'purging old modules'
 r10k puppetfile purge
 echo 'installing modules'
-r10k puppetfile install -v 
+r10k puppetfile install -v
 
 echo 'setup complete'
 ```
+
 <!-- spellchecker-enable -->
 
 Which purges the folder for whatever reason it could be there, checks some
@@ -682,6 +732,7 @@ the Puppet provisioner will use to apply them. Both files live in `ci/vagrant`.
 The `Puppetfile` looks like this:
 
 <!-- spellchecker-disable -->
+
 ```puppet
 mod 'puppetlabs-stdlib'
 
@@ -689,6 +740,7 @@ mod 'shearn89/helloworld',
     :git => 'https://github.com/shearn89/puppet-helloworld',
     :branch => 'master'
 ```
+
 <!-- spellchecker-enable -->
 
 Which is about as short as it could be. It says there's 1 dependency called
@@ -700,11 +752,13 @@ git. This is our example repo!
 The `site.pp` looks like this:
 
 <!-- spellchecker-disable -->
+
 ```puppet
 node default {
   include helloworld
 }
 ```
+
 <!-- spellchecker-enable -->
 
 That's about as plain as it gets.
@@ -714,6 +768,7 @@ That's about as plain as it gets.
 Lets run what we've done so far and see what happens.
 
 <!-- spellchecker-disable -->
+
 ```sh
 $ vagrant up
 Bringing machine 'default' up with 'virtualbox' provider...
@@ -721,6 +776,7 @@ Bringing machine 'default' up with 'virtualbox' provider...
 ==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
 ==> default: flag to force provisioning. Provisioners marked to run always will still run.
 ```
+
 <!-- spellchecker-enable -->
 
 Okay, because we previously did a `vagrant up` before we wrote the provisioning
@@ -728,14 +784,17 @@ section, we need to destroy and recreate the VM, or force it to run the
 provisioners. In the interests of cleanliness, lets destroy and recreate:
 
 <!-- spellchecker-disable -->
+
 ```sh
 $ vagrant destroy -f
 ==> default: Forcing shutdown of VM...
 ==> default: Destroying VM and associated drives...
 ```
+
 <!-- spellchecker-enable -->
 
 <!-- spellchecker-disable -->
+
 ```sh
 $ vagrant up
     ...
@@ -755,11 +814,13 @@ $ vagrant up
 ==> default: Running provisioner: file...
 $
 ```
+
 <!-- spellchecker-enable -->
 
 Nice! If you do `vagrant ssh` you can poke around and see what we've done:
 
 <!-- spellchecker-disable -->
+
 ```sh
 $ vagrant ssh
 [vagrant@vagrant ~]$ ll
@@ -771,14 +832,15 @@ drwxrwxr-x. 4 vagrant vagrant 4096 Jun 11 18:30 modules
 /usr/local/bin/r10k
 [vagrant@vagrant ~]$ which puppet
 /usr/bin/puppet
-[vagrant@vagrant ~]$ ll site.pp 
+[vagrant@vagrant ~]$ ll site.pp
 -rw-rw-r--. 1 vagrant vagrant 33 Jun 11 18:30 site.pp
 [vagrant@vagrant ~]$ ll modules/
 total 8
 drwxrwxr-x. 8 vagrant vagrant 4096 Jun 11 18:30 helloworld
 drwxr-xr-x. 9 vagrant vagrant 4096 Jun 11 18:30 stdlib
-[vagrant@vagrant ~]$ 
+[vagrant@vagrant ~]$
 ```
+
 <!-- spellchecker-enable -->
 
 All looks good. Let's get Puppet to run as a provisioner as well, and then
@@ -792,14 +854,16 @@ phase, which we're now all set up to do. We'll add the following to the bottom
 of our Vagrantfile:
 
 <!-- spellchecker-disable -->
+
 ```ruby
-config.vm.provision "puppet" do |p| 
+config.vm.provision "puppet" do |p|
   p.manifest_file = "site.pp"
   p.manifests_path = "./"
   p.working_directory = "/home/vagrant"
   p.options = "-v --modulepath=/home/vagrant/modules"
-end 
+end
 ```
+
 <!-- spellchecker-enable -->
 
 This says that we're defining [another
@@ -814,6 +878,7 @@ It should be that simple! Try the `vagrant up` again and check it exits
 gracefully:
 
 <!-- spellchecker-disable -->
+
 ```sh
 $ vagrant up
     ...
@@ -832,6 +897,7 @@ $ echo $?
 0
 $
 ```
+
 <!-- spellchecker-enable -->
 
 Excellent - we can see our (very simple) module applies correctly and the

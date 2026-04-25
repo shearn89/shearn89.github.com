@@ -13,9 +13,11 @@ draft: false
 title: Migration to Hugo
 slug: hugo-migration
 ---
+
 I decided to update the blog, only to discover that Jekyll is now quite old,
 the framework around it that I used is not maintained, and generally could do
 with a change.
+
 <!--more-->
 
 ## Introduction
@@ -44,6 +46,7 @@ CodeBuild was contentious. First it didn't like my `go install` syntax. Then I
 got this error:
 
 <!-- spellchecker-disable -->
+
 ```sh
 [Container] 2022/01/05 16:28:22 Entering phase INSTALL
 [Container] 2022/01/05 16:28:22 Running command go get github.com/gohugoio/hugo
@@ -60,6 +63,7 @@ unrecognized import path "io/fs": import path does not begin with hostname
 [Container] 2022/01/05 16:38:15 Command did not exit successfully go get github.com/gohugoio/hugo exit status 1
 [Container] 2022/01/05 16:38:15 Phase complete: INSTALL State: FAILED
 ```
+
 <!-- spellchecker-enable -->
 
 Based on [this GitHub
@@ -68,6 +72,7 @@ it looks like it's because CodeBuild uses an old version of Go. Adding the
 recommended commands to my `buildspec.yml` seemed to improve things:
 
 <!-- spellchecker-disable -->
+
 ```yaml
 version: 0.2
 phases:
@@ -84,29 +89,34 @@ artifacts:
   files:
     - public/*
 ```
+
 <!-- spellchecker-enable -->
 
 However, I then got a different error:
 
 <!-- spellchecker-disable -->
+
 ```sh
 [Container] 2022/01/05 17:14:11 Running command hugo
-Start building sites … 
+Start building sites …
 hugo v0.91.2 linux/amd64 BuildDate=unknown
 Error: Error building site: TOCSS: failed to transform "css/style.scss" (text/x-scss). Check your Hugo installation; you need the extended version to build SCSS/SASS.: this feature is not available in your current Hugo version, see https://goo.gl/YMrWcn for more information
 Total in 311 ms
 
 [Container] 2022/01/05 17:14:11 Command did not exit successfully hugo exit status 255
 ```
+
 <!-- spellchecker-enable -->
 
 The solution to this was on the Hugo website. I had to modify the tag I pulled
 from GitHub:
 
 <!-- spellchecker-disable -->
+
 ```yaml
       - 'go install --tags extended github.com/gohugoio/hugo@latest'
 ```
+
 <!-- spellchecker-enable -->
 
 ...which then worked! I ended up with a successful build and something in an S3
@@ -119,12 +129,14 @@ name, but then losing the directory structure of the actual files. That was
 easily fixed by altering the `artifacts` section of the buildspec:
 
 <!-- spellchecker-disable -->
+
 ```yaml
 artifacts:
   files:
     - '**/*'
   base-directory: 'public'
 ```
+
 <!-- spellchecker-enable -->
 
 This means that effectively the build moves into the `public/` folder before
@@ -145,9 +157,9 @@ I tried to follow the documentation, but in the end I ended up creating a new
 S3 bucket, as that seemed to immediately present the option to use an OAI. The
 following were all tried and compared with a fresh bucket:
 
-* Encryption settings
-* Static website settings
-* Public access settings
+- Encryption settings
+- Static website settings
+- Public access settings
 
 Nothing I did made a difference! I have yet to find the answer. In then end a
 new bucket seemed to allow me to attach the OAI. I have had the first bucket
@@ -206,15 +218,16 @@ Anyway, thanks to [this SO post](https://stackoverflow.com/a/69157535/216695),
 I created a CloudFront Function:
 
 <!-- spellchecker-disable -->
+
 ```javascript
 function handler(event) {
     var request = event.request;
     var uri = request.uri;
-    
+
     // Check whether the URI is missing a file name.
     if (uri.endsWith('/')) {
         request.uri += 'index.html';
-    } 
+    }
     // Check whether the URI is missing a file extension.
     else if (!uri.includes('.')) {
         request.uri += '/index.html';
@@ -223,6 +236,7 @@ function handler(event) {
     return request;
 }
 ```
+
 <!-- spellchecker-enable -->
 
 I called this `single-page-url-rewrite`. Saved it and published it from the
