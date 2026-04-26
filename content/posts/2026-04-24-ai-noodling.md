@@ -16,8 +16,8 @@ categories:
 hiddenFromHomePage: false
 hiddenFromSearch: false
 
-featuredImage: "/images/21W20-Blog-Banner-Encrypt.jpg"
-featuredImagePreview: "/images/21W20-Blog-Banner-Encrypt.jpg"
+featuredImage: "/images/ai-noodling.png"
+featuredImagePreview: "/images/ai-noodling.png"
 
 toc:
   enable: true
