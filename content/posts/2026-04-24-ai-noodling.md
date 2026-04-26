@@ -16,8 +16,8 @@ categories:
 hiddenFromHomePage: false
 hiddenFromSearch: false
 
-featuredImage: "/images/ai-noodling.png"
-featuredImagePreview: "/images/ai-noodling.png"
+featuredImage: "/images/ai-noodling.webp"
+featuredImagePreview: "/images/ai-noodling.webp"
 
 toc:
   enable: true
