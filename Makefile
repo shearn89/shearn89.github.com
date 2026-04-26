@@ -1,18 +1,18 @@
 .PHONY: setup build public lint precheck postcheck spellcheck links
 
-HUGO := mise exec -- hugo
+MISE := $(shell command -v mise 2>/dev/null || echo $$HOME/.local/bin/mise)
+HUGO := $(MISE) exec -- hugo
 
 build: setup precheck public postcheck
 
 setup:
-	@if ! command -v mise >/dev/null 2>&1; then \
+	@if ! command -v mise >/dev/null 2>&1 && [ ! -x "$$HOME/.local/bin/mise" ]; then \
 		echo "Installing mise..."; \
 		curl -fsSL https://mise.run | sh; \
-		echo "mise installed. Ensure ~/.local/bin is on your PATH and shell is activated (see https://mise.jdx.dev/getting-started.html)."; \
 	else \
-		echo "mise already installed: $$(mise --version)"; \
+		echo "mise already installed: $$($(MISE) --version)"; \
 	fi
-	@command -v mise >/dev/null 2>&1 && mise install || echo "Run 'mise install' after activating mise in your shell."
+	@$(MISE) install
 
 public:
 	$(HUGO) --config hugo.toml
