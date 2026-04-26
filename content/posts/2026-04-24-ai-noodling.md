@@ -1,8 +1,8 @@
 ---
 title: "Agentic Engineering So Far"
 subtitle: ""
-date: 2024-05-23T11:14:36+01:00
-lastmod: 2024-05-23T11:14:36+01:00
+date: 2026-04-24T11:14:36+01:00
+lastmod: 2026-04-24T11:14:36+01:00
 draft: false
 author: ""
 authorLink: ""
