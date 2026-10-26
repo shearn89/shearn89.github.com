@@ -1,0 +1,35 @@
+name: CI
+
+# Build and lint checks for PRs. Publishing stays with the CodeBuild pipeline
+# (buildspec.yml / terraform/pipeline.tf). Link checking is left out because
+# external links make it flaky.
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: true
+      # Same version as mise.toml.
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.125.7"
+          extended: true
+      - run: hugo --minify --gc
+
+  markdownlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - run: make lint
