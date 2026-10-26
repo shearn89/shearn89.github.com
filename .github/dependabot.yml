@@ -1,0 +1,14 @@
+# Keeps the Terraform provider lock current. Majors are excluded: they are
+# done by hand. Security updates are separate and ignore these rules.
+version: 2
+updates:
+  - package-ecosystem: terraform
+    directory: /terraform
+    schedule:
+      interval: weekly
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    groups:
+      terraform:
+        patterns: ["*"]
